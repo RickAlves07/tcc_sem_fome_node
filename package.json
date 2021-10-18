@@ -1,0 +1,55 @@
+{
+	"name": "tcc_sem_fome_node",
+	"version": "1.0.0",
+	"description": "backend project tcc sem fome",
+	"main": "index.js",
+	"author": "Rick Alves <rick_07@hotmail.com.br> & Johann Palheiros <jpalheiros@gmail.com>",
+	"license": "ISC",
+	"scripts": {
+		"start": "node release/index.js",
+		"dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules ./src/index.ts",
+		"release": "rimraf release && tsc -p tsconfig-build.json",
+		"test": "jest",
+		"test:unit": "npm run test -- --watch -c jest-unit-config.ts",
+		"test:integration": "npm run test -- --watch -c jest-integration-config.ts",
+		"test:clear": "jest --clearCache",
+		"test:staged": "npm run test -- --findRelatedTests",
+		"test:ci": "npm run test -- --coverage"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/RickAlves07/tcc_sem_fome_node.git"
+	},
+	"bugs": {
+		"url": "https://github.com/RickAlves07/tcc_sem_fome_node/issues"
+	},
+	"homepage": "https://github.com/RickAlves07/tcc_sem_fome_node#readme",
+	"devDependencies": {
+		"@types/express": "^4.17.13",
+		"@types/jest": "^27.0.2",
+		"@types/morgan": "^1.9.3",
+		"@typescript-eslint/eslint-plugin": "^4.31.1",
+		"@typescript-eslint/parser": "^4.24.0",
+		"eslint": "5.16.0",
+		"eslint-config-airbnb-base": "^14.2.1",
+		"eslint-config-airbnb-typescript-prettier": "^4.2.0",
+		"eslint-import-resolver-typescript": "^2.4.0",
+		"eslint-plugin-import": "^2.23.3",
+		"jest": "^27.3.0",
+		"ts-jest": "^27.0.7",
+		"ts-node-dev": "^1.1.8",
+		"tsconfig-paths": "^3.11.0",
+		"typescript": "^4.4.3"
+	},
+	"dependencies": {
+		"class-validator": "^0.13.1",
+		"dotenv": "^10.0.0",
+		"eslint-config-airbnb-base": "^14.2.1",
+		"express": "^4.17.1",
+		"http-status-codes": "^2.1.4",
+		"joi": "^17.4.2",
+		"module-alias": "^2.2.2",
+		"morgan": "^1.10.0",
+		"rimraf": "^3.0.2"
+	}
+}

@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "dev",
+			"problemMatcher": [],
+			"label": "npm: dev",
+			"detail": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules ./src/index.ts",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}
