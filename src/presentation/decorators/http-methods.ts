@@ -1,8 +1,8 @@
-import { RequestMethods } from '@/shared/utils';
+import { requestMethods } from '@/shared/utils';
 import { createRouteDecorator } from './create-decorator';
 
-export const Get = createRouteDecorator(RequestMethods.GET);
-export const Post = createRouteDecorator(RequestMethods.POST);
-export const Put = createRouteDecorator(RequestMethods.PUT);
-export const Patch = createRouteDecorator(RequestMethods.PATCH);
-export const Delete = createRouteDecorator(RequestMethods.DELETE);
+export const Get = createRouteDecorator(requestMethods.Get);
+export const Post = createRouteDecorator(requestMethods.Post);
+export const Put = createRouteDecorator(requestMethods.Put);
+export const Patch = createRouteDecorator(requestMethods.Patch);
+export const Delete = createRouteDecorator(requestMethods.Delete);

@@ -3,8 +3,7 @@ import { InvalidRequest } from '@/shared/errors';
 import Joi from 'joi';
 import { badRequest, ok } from '@/shared/helper';
 
-export const validatorParameters =
-	(schema: Joi.Schema): any =>
+export const validatorParameters = (schema: Joi.Schema): any =>
 	async (req: HttpRequest): Promise<HttpResponse> => {
 		const validation = schema.validate(req, {
 			abortEarly: false,

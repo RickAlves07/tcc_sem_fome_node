@@ -3,7 +3,7 @@ import morgan from 'morgan';
 import { CannotStartApplication } from '@/shared/errors';
 import { errorHandler } from './errorHandle';
 import { BaseController } from '@/presentation/protocols';
-import { emptyString, RequestMethods } from '@/shared/utils';
+import { emptyString, requestMethods } from '@/shared/utils';
 import { ApplicationHeathController } from '@/presentation/controllers';
 import { ExpressControllersAdapter, ExpressMiddlewaresAdapter } from '@/presentation/adapters';
 
@@ -78,19 +78,19 @@ export class Server {
 				];
 
 				switch (routeConfig.method) {
-					case RequestMethods.GET:
+					case requestMethods.Get:
 						routers.get(fullPath, functions);
 						break;
-					case RequestMethods.POST:
+					case requestMethods.Post:
 						routers.post(fullPath, functions);
 						break;
-					case RequestMethods.PUT:
+					case requestMethods.Put:
 						routers.put(fullPath, functions);
 						break;
-					case RequestMethods.PATCH:
+					case requestMethods.Patch:
 						routers.patch(fullPath, functions);
 						break;
-					case RequestMethods.DELETE:
+					case requestMethods.Delete:
 						routers.delete(fullPath, functions);
 						break;
 					default:
