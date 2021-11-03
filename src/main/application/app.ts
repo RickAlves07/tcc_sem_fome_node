@@ -1,5 +1,5 @@
 import { validateOrReject, ValidationError } from 'class-validator';
-import { Server } from "./server";
+import { Server } from './server';
 import { env } from '../env';
 import { EnvError } from '../env/env-error';
 import { MySqlDB } from './mysql-db';
@@ -17,7 +17,9 @@ export class Application {
 				env.mysqlPort,
 				env.mysqlDatabase,
 				env.mysqlUser,
-				env.mysqlPassword);
+				env.mysqlPassword,
+				env.appTimezone,
+			);
 
 			this.server = new Server(env.serverPort, env.serverHost);
 

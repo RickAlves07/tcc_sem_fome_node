@@ -29,13 +29,19 @@ export class EnvValidator {
 	@IsNotEmpty()
 	mysqlPassword: string;
 
+
+	@IsString()
+	appTimezone: string;
+
 	constructor(props: any) {
-		this.serverPort = props.httpPort;
-		this.mysqlHost = props.httpPort;
-		this.mysqlPort= props.httpPort;
-		this.mysqlDatabase= props.httpPort;
-		this.mysqlUser = props.httpPort;
-		this.mysqlPassword = props.httpPort;
+		this.serverHost = props.serverHost;
+		this.serverPort = props.serverPort;
+		this.mysqlHost = props.mysqlHost;
+		this.mysqlPort= props.mysqlPort;
+		this.mysqlDatabase= props.mysqlDatabase;
+		this.mysqlUser = props.mysqlUser;
+		this.mysqlPassword = props.mysqlPassword;
+		this.appTimezone = props.appTimezone;
 		Object.assign(this, props);
 	}
 }
