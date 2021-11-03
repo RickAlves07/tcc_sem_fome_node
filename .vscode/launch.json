@@ -14,7 +14,7 @@
 			"program": "${workspaceFolder}\\release\\index.js",
 			"preLaunchTask": "tsc: build - tsconfig-build.json",
 			"outFiles": [
-				"${workspaceFolder}/**/*.js"
+				"${workspaceFolder}/release/**/*.js"
 			]
 		}
 	]
