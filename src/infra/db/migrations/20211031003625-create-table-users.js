@@ -4,8 +4,8 @@ const usersTable = 'users';
 module.exports = {
 	up: async (queryInterface, Sequelize) => {
 		await queryInterface.createTable(usersTable, {
-			user_id: {
-				type: Sequelize.BIGINT,
+			id: {
+				type: Sequelize.INTEGER,
 				primaryKey: true,
 				autoIncrement: true,
 				allowNull: false,
@@ -35,9 +35,9 @@ module.exports = {
 				allowNull: false,
 			},
 			address_id: {
-				type: Sequelize.BIGINT,
+				type: Sequelize.INTEGER,
 				allowNull: false,
-				references: { model: 'addresses', key: 'address_id'},
+				references: { model: 'addresses', key: 'id'},
 				onUpdate: 'CASCADE',
 				onDelete: 'CASCADE'
 			},

@@ -4,8 +4,8 @@ const provisionsTable = 'provisions';
 module.exports = {
 	up: async (queryInterface, Sequelize) => {
 		await queryInterface.createTable(provisionsTable, {
-			provision_id: {
-				type: Sequelize.BIGINT,
+			id: {
+				type: Sequelize.INTEGER,
 				primaryKey: true,
 				autoIncrement: true,
 				allowNull: false,
@@ -27,9 +27,9 @@ module.exports = {
 				allowNull: false,
 			},
 			donation_package_id: {
-				type: Sequelize.BIGINT,
+				type: Sequelize.INTEGER,
 				allowNull: false,
-				references: { model: 'donations_packages', key: 'donation_package_id'},
+				references: { model: 'donations_packages', key: 'id'},
 				onUpdate: 'CASCADE',
 				onDelete: 'CASCADE'
 			},

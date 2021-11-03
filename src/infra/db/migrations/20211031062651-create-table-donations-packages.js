@@ -4,8 +4,8 @@ const donationsPackagesTable = 'donations_packages';
 module.exports = {
 	up: async (queryInterface, Sequelize) => {
 		await queryInterface.createTable(donationsPackagesTable, {
-			donation_package_id: {
-				type: Sequelize.BIGINT,
+			id: {
+				type: Sequelize.INTEGER,
 				primaryKey: true,
 				autoIncrement: true,
 				allowNull: false,
@@ -22,30 +22,30 @@ module.exports = {
 				type: Sequelize.FLOAT,
 				allowNull: false,
 			},
-			address_id: {
-				type: Sequelize.BIGINT,
+			comments: {
+				type: Sequelize.STRING,
 				allowNull: true,
-				references: { model: 'addresses', key: 'address_id'},
-				onUpdate: 'CASCADE',
-				onDelete: 'SET NULL'
 			},
 			shipment_id: {
-				type: Sequelize.BIGINT,
+				type: Sequelize.INTEGER,
 				allowNull: true,
-				references: { model: 'shipments', key: 'shipment_id'},
+				references: { model: 'shipments', key: 'id'},
 				onUpdate: 'CASCADE',
 				onDelete: 'SET NULL'
 			},
 			user_donor_id: {
-				type: Sequelize.BIGINT,
+				type: Sequelize.INTEGER,
 				allowNull: true,
-				references: { model: 'users', key: 'user_id'},
+				references: { model: 'users', key: 'id'},
 				onUpdate: 'CASCADE',
 				onDelete: 'SET NULL'
 			},
-			comments: {
-				type: Sequelize.STRING,
+			address_donor_id: {
+				type: Sequelize.INTEGER,
 				allowNull: true,
+				references: { model: 'addresses', key: 'id'},
+				onUpdate: 'CASCADE',
+				onDelete: 'SET NULL'
 			},
 			scheduled_at: {
 				type: Sequelize.DATE,

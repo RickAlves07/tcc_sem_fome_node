@@ -4,8 +4,8 @@ const organizationsTable = 'organizations';
 module.exports = {
 	up: async (queryInterface, Sequelize) => {
 		await queryInterface.createTable(organizationsTable, {
-			organization_id: {
-				type: Sequelize.BIGINT,
+			id: {
+				type: Sequelize.INTEGER,
 				primaryKey: true,
 				autoIncrement: true,
 				allowNull: false,
@@ -26,17 +26,17 @@ module.exports = {
 				type: Sequelize.STRING,
 				allowNull: false,
 			},
-			owner_user_id: {
-				type: Sequelize.BIGINT,
+			owner_id: {
+				type: Sequelize.INTEGER,
 				allowNull: false,
-				references: { model: 'users', key: 'user_id'},
+				references: { model: 'users', key: 'id'},
 				onUpdate: 'CASCADE',
 				onDelete: 'CASCADE'
 			},
 			address_id: {
-				type: Sequelize.BIGINT,
+				type: Sequelize.INTEGER,
 				allowNull: false,
-				references: { model: 'addresses', key: 'address_id'},
+				references: { model: 'addresses', key: 'id'},
 				onUpdate: 'CASCADE',
 				onDelete: 'CASCADE'
 			},

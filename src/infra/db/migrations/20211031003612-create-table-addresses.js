@@ -4,8 +4,8 @@ const addressesTable = 'addresses';
 module.exports = {
 	up: async (queryInterface, Sequelize) => {
 		await queryInterface.createTable(addressesTable, {
-			address_id: {
-				type: Sequelize.BIGINT,
+			id: {
+				type: Sequelize.INTEGER,
 				primaryKey: true,
 				autoIncrement: true,
 				allowNull: false,
@@ -36,7 +36,8 @@ module.exports = {
 			},
 			complement: {
 				type: Sequelize.STRING,
-				allowNull: false,
+				allowNull: true,
+				defaultValue: null,
 			},
 			latitude: {
 				type: Sequelize.FLOAT,
