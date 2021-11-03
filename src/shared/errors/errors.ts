@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { BadRequest, InternalServerError, NotFound } from './http-status-errors';
+import { BadRequest, InternalServerError, NotFound, Unauthorized } from './http-status-errors';
 
 export class PageNotFound extends NotFound {
 	constructor() {
@@ -19,8 +19,20 @@ export class UnableConnectDatabase extends InternalServerError {
 	}
 }
 
+export class InternalDatabaseError extends InternalServerError {
+	constructor(details: Error) {
+		super('Internal database error.', details);
+	}
+}
+
 export class CannotStartApplication extends InternalServerError {
 	constructor(details: Error) {
 		super('Cannot start application.', details);
+	}
+}
+
+export class EmailAlreadyRegistered extends BadRequest {
+	constructor() {
+		super('This email is already registered in another account');
 	}
 }
