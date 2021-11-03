@@ -3,9 +3,9 @@ import morgan from 'morgan';
 import { CannotStartApplication } from '@/shared/errors';
 import { errorHandler } from './errorHandle';
 import { BaseController } from '@/presentation/protocols';
-import { emptyString, requestMethods } from '@/shared/utils';
-import { ApplicationHeathController } from '@/presentation/controllers';
 import { ExpressControllersAdapter, ExpressMiddlewaresAdapter } from '@/presentation/adapters';
+import { emptyString } from '@/shared/utils';
+import { ApplicationHeathController, AddressController } from '@/presentation/controllers';
 
 import { PageNotFound } from '@/shared/errors';
 export class Server {
@@ -54,7 +54,7 @@ export class Server {
 		app.use(errorHandler);
 		app.listen(this.serverPort);
 
-		console.log(`Server started. Access in http://${this.serverHost}:${this.serverPort}.`);
+		console.log(`Server started. Access in http://${this.serverHost}:${this.serverPort}/api/semfome.`);
 
 		return app;
 	}
@@ -62,7 +62,7 @@ export class Server {
 	private async createAppControllersRouters(): Promise<express.Router>
 	{
 		const routers = express.Router();
-		this.loadAppControllers().forEach(controller => {
+		await this.loadAppControllers().forEach(controller => {
 			if (!controller.routeConfigs) {
 				return;
 			}
@@ -77,25 +77,8 @@ export class Server {
 					ExpressControllersAdapter(routeConfig.func.bind(controller))
 				];
 
-				switch (routeConfig.method) {
-					case requestMethods.Get:
-						routers.get(fullPath, functions);
-						break;
-					case requestMethods.Post:
-						routers.post(fullPath, functions);
-						break;
-					case requestMethods.Put:
-						routers.put(fullPath, functions);
-						break;
-					case requestMethods.Patch:
-						routers.patch(fullPath, functions);
-						break;
-					case requestMethods.Delete:
-						routers.delete(fullPath, functions);
-						break;
-					default:
-						break;
-				}
+				routers[routeConfig.method](fullPath, functions);
+
 			});
 		});
 
@@ -105,6 +88,7 @@ export class Server {
 	private loadAppControllers(): BaseController[] {
 		return [
 			new ApplicationHeathController,
+			new AddressController,
 		];
 	}
 }
