@@ -1,6 +1,6 @@
-import { HttpRequest, HttpResponse } from './../protocols/http';
-import { InvalidRequest } from '@/shared/errors';
 import Joi from 'joi';
+import { HttpRequest, HttpResponse } from '@/presentation/protocols';
+import { InvalidRequest } from '@/shared/errors';
 import { badRequest, ok } from '@/shared/helper';
 
 export const validatorParameters = (schema: Joi.Schema): any =>

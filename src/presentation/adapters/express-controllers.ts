@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
-import { HttpRequest, Controller } from '../protocols';
+import { HttpRequest, IController } from '../protocols';
 
-export const ExpressControllersAdapter = (controller: Controller) => {
+export const ExpressControllersAdapter = (controller: IController) => {
 	return async (
 		req: Request,
 		res: Response,

@@ -1,9 +1,8 @@
-import { Controller } from './base-controller';
-import { Middleware } from '../protocols';
+import { IController, Middleware } from '.';
 
 export interface RouteConfig {
 	method: string;
 	path: string;
-	func: Controller;
+	func: IController;
 	middlewares: Middleware[];
 }

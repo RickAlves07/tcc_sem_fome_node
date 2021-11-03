@@ -1,5 +1,5 @@
 import { InternalDatabaseError } from '@/shared/errors';
-import { ModelStatic } from '../models/db-model-static';
+import { ModelStatic } from '../models/model-type';
 import { IBaseRepository } from './base-repository';
 
 export class MySqlBaseRepository<T extends {}> implements IBaseRepository<T>
