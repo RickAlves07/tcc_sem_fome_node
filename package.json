@@ -1,7 +1,7 @@
 {
 	"name": "tcc_sem_fome_node",
 	"version": "1.0.0",
-	"description": "backend project tcc sem fome",
+	"description": "backend project sem fome",
 	"main": "index.js",
 	"author": "Rick Alves <rick_07@hotmail.com.br> & Johann Palheiros <jpalheiros@gmail.com>",
 	"license": "ISC",
