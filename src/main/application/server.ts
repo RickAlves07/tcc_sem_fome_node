@@ -1,13 +1,12 @@
 import express from 'express';
 import morgan from 'morgan';
-import { CannotStartApplication } from '@/shared/errors';
+import { container } from 'tsyringe';
 import { errorHandler } from './errorHandle';
 import { BaseController } from '@/presentation/protocols';
 import { ExpressControllersAdapter, ExpressMiddlewaresAdapter } from '@/presentation/adapters';
 import { emptyString } from '@/shared/utils';
 import { ApplicationHeathController, AddressController } from '@/presentation/controllers';
-
-import { PageNotFound } from '@/shared/errors';
+import { PageNotFound, CannotStartApplication } from '@/shared/errors';
 export class Server {
 	app?: express.Application;
 	serverPort?: number;
@@ -87,8 +86,8 @@ export class Server {
 
 	private loadAppControllers(): BaseController[] {
 		return [
-			new ApplicationHeathController,
-			new AddressController,
+			container.resolve(ApplicationHeathController),
+			container.resolve(AddressController),
 		];
 	}
 }
