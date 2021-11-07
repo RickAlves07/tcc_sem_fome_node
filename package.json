@@ -7,7 +7,7 @@
 	"license": "ISC",
 	"scripts": {
 		"start": "node release/index.js",
-		"dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules ./src/index.ts",
+		"dev": "npm run migrations:run && ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules ./src/index.ts",
 		"release": "rimraf release && tsc -p tsconfig-build.json",
 		"test": "jest",
 		"test:unit": "npm run test -- --watch -c jest-unit-config.ts",
