@@ -1,5 +1,5 @@
 export type Shipment = {
-	id: number;
+	id?: number;
 	status: string;
 	total_weight: number;
 	user_transporter_id: number;

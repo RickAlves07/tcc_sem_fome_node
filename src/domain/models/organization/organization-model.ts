@@ -16,6 +16,6 @@ export class OrganizationModel extends Model {
 
 	static associate(models) {
 		OrganizationModel.belongsTo(models.UserModel, { foreignKey: 'owner_id', as: 'organization_owner_user'});
-		OrganizationModel.hasOne(models.AddressModel, { foreignKey: 'id', as: 'organization_address'});
+		OrganizationModel.belongsTo(models.AddressModel, { foreignKey: 'address_id', as: 'organization_address'});
 	}
 }

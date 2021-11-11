@@ -8,7 +8,7 @@ export type User = {
 	password: string,
 	address_id: number,
 	profile_type: string,
-	activated_at: Date | null,
+	activated_at?: Date | null,
 	created_at?: Date,
 	updated_at?: Date,
 };
