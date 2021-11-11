@@ -15,9 +15,12 @@
 		"test:clear": "jest --clearCache",
 		"test:staged": "npm run test -- --findRelatedTests",
 		"test:ci": "npm run test -- --coverage",
-		"migrations:rollback": "sequelize db:migrate:undo:all",
+		"migrations:rollback": "npm run seeders:rollback && sequelize db:migrate:undo:all",
 		"migrations:rollback:one": "sequelize db:migrate:undo",
-		"migrations:run": "sequelize db:migrate"
+		"migrations:run": "sequelize db:migrate && npm run seeders:run",
+		"seeders:rollback:one": "sequelize db:seed:undo",
+		"seeders:rollback": "sequelize db:seed:undo:all",
+		"seeders:run": "sequelize db:seed:all"
 	},
 	"repository": {
 		"type": "git",

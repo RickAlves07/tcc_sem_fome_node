@@ -1,0 +1,8 @@
+[
+  "20211031003612-create-table-addresses.js",
+  "20211031003625-create-table-users.js",
+  "20211031005518-create-table-organizations.js",
+  "20211031062621-create-table-shipments.js",
+  "20211031062651-create-table-donations-packages.js",
+  "20211031062722-create-table-provisions.js"
+]

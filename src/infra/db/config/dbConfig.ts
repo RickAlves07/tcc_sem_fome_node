@@ -1,4 +1,5 @@
 const dotenv = require('dotenv');
+const path = require('path')
 
 dotenv.config();
 
@@ -18,7 +19,11 @@ module.exports = {
 	database: env.mysqlDatabase,
 	username: env.mysqlUser,
 	password: env.mysqlPassword,
+	'migrationStorage': 'json',
+	'migrationStoragePath': path.resolve('src', 'infra', 'db/migrations/migrations-history.json'),
 	'migrationStorageTableName': 'migrations_history',
+	'seederStorage': 'json',
+	'seederStoragePath': path.resolve('src', 'infra', 'db', 'seeders', 'seeders-history.json'),
 	'seedersStorageTableName': 'seeders_history',
 	define: {
 		timestamps: true,
