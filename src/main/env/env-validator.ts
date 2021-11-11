@@ -1,13 +1,13 @@
 import { IsInt, IsNotEmpty, IsString } from 'class-validator';
 
 export class EnvValidator {
-	@IsInt()
-	@IsNotEmpty()
-	serverPort: number;
-
 	@IsString()
 	@IsNotEmpty()
 	serverHost: string;
+
+	@IsInt()
+	@IsNotEmpty()
+	serverPort: number;
 
 	@IsString()
 	@IsNotEmpty()
@@ -33,15 +33,18 @@ export class EnvValidator {
 	@IsString()
 	appTimezone: string;
 
-	constructor(props: any) {
-		this.serverHost = props.serverHost;
-		this.serverPort = props.serverPort;
-		this.mysqlHost = props.mysqlHost;
-		this.mysqlPort= props.mysqlPort;
-		this.mysqlDatabase= props.mysqlDatabase;
-		this.mysqlUser = props.mysqlUser;
-		this.mysqlPassword = props.mysqlPassword;
-		this.appTimezone = props.appTimezone;
+	constructor(props: envProps) {
 		Object.assign(this, props);
 	}
+}
+
+type envProps = {
+	serverHost: string;
+	serverPort: number;
+	mysqlHost: string;
+	mysqlPort: number;
+	mysqlDatabase: string;
+	mysqlUser: string;
+	mysqlPassword: string;
+	appTimezone: string;
 }
