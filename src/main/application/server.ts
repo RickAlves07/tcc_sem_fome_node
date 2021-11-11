@@ -1,11 +1,19 @@
 import express from 'express';
 import morgan from 'morgan';
+import cors from 'cors';
 import { container } from 'tsyringe';
 import { errorHandler } from './errorHandle';
 import { BaseController } from '@/presentation/protocols';
 import { ExpressControllersAdapter, ExpressMiddlewaresAdapter } from '@/presentation/adapters';
 import { emptyString } from '@/shared/utils';
-import { ApplicationHeathController, AddressController } from '@/presentation/controllers';
+import {
+	ApplicationHeathController,
+	AddressController,
+	DonationPackageController,
+	ProvisionController,
+	ShipmentController,
+	UserController,
+	OrganizationController } from '@/presentation/controllers';
 import { PageNotFound, CannotStartApplication } from '@/shared/errors';
 export class Server {
 	app?: express.Application;
@@ -34,6 +42,7 @@ export class Server {
 		const app = express();
 
 		/* Express utilites */
+		app.use(cors());
 		app.use(express.json());
 		app.use(express.urlencoded({ extended: true }));
 		app.use(morgan('tiny'));
@@ -88,6 +97,11 @@ export class Server {
 		return [
 			container.resolve(ApplicationHeathController),
 			container.resolve(AddressController),
+			container.resolve(DonationPackageController),
+			container.resolve(OrganizationController),
+			container.resolve(ProvisionController),
+			container.resolve(ShipmentController),
+			container.resolve(UserController)
 		];
 	}
 }
