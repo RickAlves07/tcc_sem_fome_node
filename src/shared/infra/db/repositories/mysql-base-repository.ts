@@ -39,7 +39,6 @@ export class MySqlBaseRepository<T extends {}> implements IBaseRepository<T>
 	public async findAll(pageIndex: number, pageSize: number, conditions?: {}): Promise<T[]> {
 		try {
 			const response = await this.ormRepository.findAll({
-				where: conditions,
 				offset: (pageIndex - 1) * pageSize,
 				limit: pageSize,
 			});
