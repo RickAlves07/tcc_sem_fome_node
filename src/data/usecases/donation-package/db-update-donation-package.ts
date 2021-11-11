@@ -22,7 +22,6 @@ export class DbUpdateDonationPackage implements IUpdateDonationPackage {
 			address_donor_id,
 			shipment_id,
 			scheduled_at,
-			collected_at,
 		} = data
 
 		const updatedDonationPackage = await this.donationPackageRepository.update({
@@ -34,7 +33,6 @@ export class DbUpdateDonationPackage implements IUpdateDonationPackage {
 			address_donor_id,
 			shipment_id,
 			scheduled_at,
-			collected_at,
 		}, id );
 
 		return updatedDonationPackage;

@@ -5,10 +5,8 @@ export class ShipmentModel extends Model {
 		ShipmentModel.init({
 			status: DataTypes.STRING,
 			total_weight: DataTypes.FLOAT,
-			expiration_date: DataTypes.DATE,
-			scheduled_at: DataTypes.DATE,
 			collected_at: DataTypes.DATE,
-			delivery_at: DataTypes.DATE,
+			delivered_at: DataTypes.DATE,
 			created_at: DataTypes.DATE,
 			updated_at: DataTypes.DATE,
 		}, {

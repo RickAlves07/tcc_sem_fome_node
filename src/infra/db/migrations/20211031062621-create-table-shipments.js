@@ -32,19 +32,11 @@ module.exports = {
 				onUpdate: 'CASCADE',
 				onDelete: 'SET NULL'
 			},
-			expiration_date: {
-				type: Sequelize.DATE,
-				allowNull: false,
-			},
-			scheduled_at: {
-				type: Sequelize.DATE,
-				allowNull: false,
-			},
 			collected_at: {
 				type: Sequelize.DATE,
 				allowNull: true,
 			},
-			delivery_at: {
+			delivered_at: {
 				type: Sequelize.DATE,
 				allowNull: true,
 			},

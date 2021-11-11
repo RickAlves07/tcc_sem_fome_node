@@ -15,7 +15,6 @@ export namespace UpdateDonationPackage {
 		address_donor_id: number;
 		shipment_id?: number | null;
 		scheduled_at: Date;
-		collected_at?: Date | null;
 	};
 
 	export type Result = DonationPackage;

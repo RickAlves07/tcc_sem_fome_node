@@ -8,7 +8,6 @@ export type DonationPackage = {
 	user_donor_id: number;
 	address_donor_id: number;
 	scheduled_at: Date;
-	collected_at?: Date | null;
 	created_at?: Date;
 	updated_at?: Date;
 };

@@ -4,10 +4,8 @@ export type Shipment = {
 	total_weight: number;
 	user_transporter_id: number;
 	user_distributor_id: number;
-	expiration_date: Date;
-	scheduled_at: Date;
 	collected_at: Date | null;
-	delivery_at: Date | null;
+	delivered_at: Date | null;
 	created_at?: Date;
 	updated_at?: Date;
 };

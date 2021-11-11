@@ -8,7 +8,6 @@ export class DonationPackageModel extends Model {
 			total_weight: DataTypes.FLOAT,
 			comments: DataTypes.STRING,
 			scheduled_at: DataTypes.DATE,
-			collected_at: DataTypes.DATE,
 		}, {
 			sequelize: connection,
 			tableName: 'donations-packages'

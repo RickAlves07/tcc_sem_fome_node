@@ -18,10 +18,8 @@ export class DbUpdateShipment implements IUpdateShipment {
 			total_weight,
 			user_transporter_id,
 			user_distributor_id,
-			expiration_date,
-			scheduled_at,
 			collected_at,
-			delivery_at,
+			delivered_at,
 		} = data
 
 		const updatedShipment = await this.shipmentRepository.update({
@@ -29,10 +27,8 @@ export class DbUpdateShipment implements IUpdateShipment {
 			total_weight,
 			user_transporter_id,
 			user_distributor_id,
-			expiration_date,
-			scheduled_at,
 			collected_at,
-			delivery_at,
+			delivered_at,
 		}, id );
 
 		return updatedShipment;
