@@ -20,7 +20,11 @@ export default {
 	// collectCoverage: true,
 
 	// An array of glob patterns indicating a set of files for which coverage information should be collected
-	// collectCoverageFrom: undefined,
+	collectCoverageFrom: [
+		'<rootDir>/src/**/*.ts',
+		'!<rootDir>/src/main/**',
+		'!<rootDir>/src/shared/**',
+	  ],
 
 	// The directory where Jest should output its coverage files
 	coverageDirectory: "coverage",
@@ -128,7 +132,7 @@ export default {
 	// runner: "jest-runner",
 
 	// The paths to modules that run some code to configure or set up the testing environment before each test
-	// setupFiles: [],
+	setupFiles: ['reflect-metadata'],
 
 	// A list of paths to modules that run some code to configure or set up the testing framework before each test
 	// setupFilesAfterEnv: [],
