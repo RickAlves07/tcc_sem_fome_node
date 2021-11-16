@@ -9,10 +9,4 @@ implements IAddressRepository
 		super();
 		this.ormRepository = AddressModel;
 	}
-
-	public async findByGeolocation(pageIndex: number, pageSize: number, latitude: number, longitude: number): Promise<Address[] | null> {
-		const response = await super.findAll(pageIndex, pageSize, { latitude, longitude })
-
-		return response;
-	}
 }

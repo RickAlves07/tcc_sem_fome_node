@@ -13,8 +13,6 @@ export namespace UpdateAddress {
 		city?: string,
 		state?: string,
 		complement?: string,
-		latitude?: number,
-		longitude?: number,
 	};
 
 	export type Result = Address;

@@ -21,8 +21,6 @@ export class DbUpdateAddress implements IUpdateAddress {
 			city,
 			state,
 			complement,
-			latitude,
-			longitude
 		} = data
 
 		const updatedAddress = await this.addressRepository.update({
@@ -33,8 +31,6 @@ export class DbUpdateAddress implements IUpdateAddress {
 				city,
 				state,
 				complement,
-				latitude,
-				longitude,
 		}, id );
 
 		return updatedAddress;

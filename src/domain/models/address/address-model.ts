@@ -11,8 +11,6 @@ export class AddressModel extends Model<Address> {
 			city: DataTypes.STRING,
 			state: DataTypes.STRING,
 			complement: DataTypes.STRING,
-			latitude: DataTypes.FLOAT,
-			longitude: DataTypes.FLOAT,
 		}, {
 			sequelize: connection,
 			tableName: 'addresses',

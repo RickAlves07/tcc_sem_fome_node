@@ -11,8 +11,6 @@ export namespace AddAddress {
 		city: string,
 		state: string,
 		complement?: string,
-		latitude: number,
-		longitude: number,
 	};
 
 	export type Result = boolean;
