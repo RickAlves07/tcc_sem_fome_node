@@ -3,8 +3,6 @@ import { Model, DataTypes } from 'sequelize';
 export class ShipmentModel extends Model {
 	static start(connection) {
 		ShipmentModel.init({
-			status: DataTypes.STRING,
-			total_weight: DataTypes.FLOAT,
 			collected_at: DataTypes.DATE,
 			delivered_at: DataTypes.DATE,
 			created_at: DataTypes.DATE,

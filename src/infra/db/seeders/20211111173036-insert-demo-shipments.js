@@ -11,8 +11,6 @@ module.exports = {
 	up: (queryInterface, Sequelize) => {
 		return queryInterface.bulkInsert(shipmentsTable, [{
 			id: 1,
-			status: 'delivered',
-			total_weight: 15.5,
 			user_transporter_id: 2,
 			user_distributor_id: 3,
 			collected_at: collected_1,
@@ -21,8 +19,6 @@ module.exports = {
 			updated_at: new Date(),
 		}, {
 			id: 2,
-			status: 'on delivery route',
-			total_weight: 20,
 			user_transporter_id: 2,
 			user_distributor_id: 3,
 			collected_at: collected_2,
@@ -31,8 +27,6 @@ module.exports = {
 			updated_at: new Date(),
 		}, {
 			id: 3,
-			status: 'waiting for pickup',
-			total_weight: 10.4,
 			user_transporter_id: 2,
 			user_distributor_id: 3,
 			collected_at: null,

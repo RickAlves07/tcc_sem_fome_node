@@ -6,8 +6,6 @@ export interface IUpdateShipment {
 export namespace UpdateShipment {
 	export type Params = {
 		id: number;
-		status: string;
-		total_weight: number;
 		user_transporter_id: number;
 		user_distributor_id: number;
 		collected_at?: Date | null;

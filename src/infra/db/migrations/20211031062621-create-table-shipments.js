@@ -10,14 +10,6 @@ module.exports = {
 				autoIncrement: true,
 				allowNull: false,
 			},
-			status: {
-				type: Sequelize.STRING,
-				allowNull: false,
-			},
-			total_weight: {
-				type: Sequelize.FLOAT,
-				allowNull: false,
-			},
 			user_transporter_id: {
 				type: Sequelize.INTEGER,
 				allowNull: true,
