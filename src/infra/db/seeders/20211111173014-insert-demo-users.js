@@ -5,8 +5,7 @@ module.exports = {
 	up: (queryInterface, Sequelize) => {
 		return queryInterface.bulkInsert(usersTable, [{
 			id: 1,
-			name: 'Usuario',
-			last_name: 'Doador',
+			name: 'Usuario Doador',
 			cpf: '000.000.000-01',
 			email: 'doador@email.com',
 			phone_number: '(21) 98765-4321',
@@ -18,8 +17,7 @@ module.exports = {
 			updated_at: new Date(),
 		}, {
 			id: 2,
-			name: 'Usuario',
-			last_name: 'Transportador',
+			name: 'Usuario Transportador',
 			cpf: '000.000.000-02',
 			email: 'transportador@email.com',
 			phone_number: '(21) 98765-4321',
@@ -31,8 +29,7 @@ module.exports = {
 			updated_at: new Date(),
 		}, {
 			id: 3,
-			name: 'Usuario',
-			last_name: 'Distribuidor',
+			name: 'Usuario Distribuidor',
 			cpf: '000.000.000-03',
 			email: 'distribuidor@email.com',
 			phone_number: '(21) 98765-4321',

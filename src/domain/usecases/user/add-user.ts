@@ -5,7 +5,6 @@ export interface IAddUser {
 export namespace AddUser {
 	export type Params = {
 		name: string,
-		last_name: string,
 		cpf: string,
 		email: string,
 		phone_number: string,

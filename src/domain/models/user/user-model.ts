@@ -4,7 +4,6 @@ export class UserModel extends Model {
 	static start(connection) {
 		UserModel.init({
 			name: DataTypes.STRING,
-			last_name: DataTypes.STRING,
 			cpf: DataTypes.STRING,
 			email: DataTypes.STRING,
 			phone_number: DataTypes.STRING,

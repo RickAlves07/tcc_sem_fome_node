@@ -15,7 +15,6 @@ export class DbUpdateUser implements IUpdateUser {
 		const {
 			id,
 			name,
-			last_name,
 			cpf,
 			email,
 			phone_number,
@@ -27,7 +26,6 @@ export class DbUpdateUser implements IUpdateUser {
 
 		const updatedUser = await this.userRepository.update({
 			name,
-			last_name,
 			cpf,
 			email,
 			phone_number,
