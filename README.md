@@ -33,7 +33,7 @@ Abra um terminal na pasta onde se encontra o projeto, e execute o comando:
 
 ### Variaveis de ambiente
 Crie um arquivo com o nome `.env` e adicione o conteúdo abaixo:
-
+```
 SERVER_PORT=27017 #porta usada pela aplicação
 SERVER_HOST=localhost #host do servidor
 MYSQL_HOST=localhost #host do banco de dados mysql
@@ -42,7 +42,7 @@ MYSQL_DATABASE=semfome/database #nome da base usada pela aplicação
 MYSQL_USER=node@api #Nome do usuario para acesso ao banco
 MYSQL_PASSWORD=node@semfome #senha do usuario para acesso ao banco
 APP_TIMEZONE='-03:00' #GMT Brasilia/Brasil
-
+```
 
 ### Banco de dados
 Para criar o container do banco de dados da aplicação, abra um terminão e execute os comandos:
