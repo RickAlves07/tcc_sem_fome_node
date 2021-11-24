@@ -42,6 +42,10 @@ export class MySqlDB {
 			password: this.dbPassword,
 			// logging: (...msg) => console.log(msg),
 			timezone: this.appTimezone,
+			define: {
+				timestamps: true,
+				underscored: true,
+			}
 		});
 
 		await connection.authenticate();
