@@ -12,8 +12,6 @@ export class DbAddAddress implements IAddAddress {
 
 	async add(data: AddAddress.Params): Promise<AddAddress.Result> {
 
-		await this.addressRepository.save(data);
-
-		return true;
+		return await this.addressRepository.save(data);
 	}
 }

@@ -12,8 +12,6 @@ export class DbAddUser implements IAddUser {
 
 	async add(data: AddUser.Params): Promise<AddUser.Result> {
 
-		await this.userRepository.save(data);
-
-		return true;
+		return await this.userRepository.save(data);
 	}
 }

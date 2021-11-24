@@ -1,3 +1,4 @@
+import { Address } from './../../models/address';
 export interface IAddAddress {
 	add: (addressData: AddAddress.Params) => Promise<AddAddress.Result>;
 }
@@ -13,5 +14,5 @@ export namespace AddAddress {
 		complement?: string,
 	};
 
-	export type Result = boolean;
+	export type Result = Address;
 }

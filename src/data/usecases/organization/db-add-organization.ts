@@ -12,8 +12,6 @@ export class DbAddOrganization implements IAddOrganization {
 
 	async add(data: AddOrganization.Params): Promise<AddOrganization.Result> {
 
-		await this.organizationRepository.save(data);
-
-		return true;
+		return await this.organizationRepository.save(data);
 	}
 }

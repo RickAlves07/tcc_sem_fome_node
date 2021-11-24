@@ -1,3 +1,4 @@
+import { Organization } from './../../models/organization/organization';
 export interface IAddOrganization {
 	add: (organizationData: AddOrganization.Params) => Promise<AddOrganization.Result>;
 }
@@ -12,5 +13,5 @@ export namespace AddOrganization {
 		address_id: number;
 	};
 
-	export type Result = boolean;
+	export type Result = Organization;
 }
