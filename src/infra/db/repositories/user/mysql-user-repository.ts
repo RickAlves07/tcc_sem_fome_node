@@ -10,8 +10,12 @@ implements IUserRepository
 		this.ormRepository = UserModel;
 	}
 
-	public findByEmail(email: string): Promise<User> {
+	public async findByEmail(email: string): Promise<User> {
+		return await super.findWithConditions({ where: { email: email }, attributes: { exclude: ['password']}});
+	}
 
-		return null;
+	public async save(data: User, conditions?: {}): Promise<User> {
+		return await super.save(data, { attributes: { exclude: ['password'] }
+		});
 	}
 }

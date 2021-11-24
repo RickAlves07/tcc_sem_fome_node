@@ -6,9 +6,9 @@ export class MySqlBaseRepository<T extends {}> implements IBaseRepository<T>
 {
 	protected ormRepository: ModelStatic;
 
-	public async build(data: T): Promise<T> {
+	public async build(data: T, conditions?: {}): Promise<T> {
 		try {
-			const response = await this.ormRepository.build(data);
+			const response = await this.ormRepository.build(data, {...conditions});
 
 			return response;
 		} catch (error) {
@@ -16,9 +16,9 @@ export class MySqlBaseRepository<T extends {}> implements IBaseRepository<T>
 		}
 	}
 
-	public async save(data: T): Promise<T> {
+	public async save(data: T, conditions?: {}): Promise<T> {
 		try {
-			const response = await this.ormRepository.create(data);
+			const response = await this.ormRepository.create(data, {...conditions});
 
 			return response;
 		} catch (error) {
@@ -26,9 +26,19 @@ export class MySqlBaseRepository<T extends {}> implements IBaseRepository<T>
 		}
 	}
 
-	public async findById(id: number): Promise<T | null> {
+	public async findById(id: number, conditions?: {}): Promise<T | null> {
 		try {
-			const response = await this.ormRepository.findByPk(id);
+			const response = await this.ormRepository.findByPk(id, {...conditions});
+
+			return response;
+		} catch (error) {
+			throw new InternalDatabaseError(error)
+		}
+	}
+
+	public async findWithConditions(conditions: {}): Promise<T | null> {
+		try {
+			const response = await this.ormRepository.findOne({...conditions});
 
 			return response;
 		} catch (error) {
@@ -41,6 +51,7 @@ export class MySqlBaseRepository<T extends {}> implements IBaseRepository<T>
 			const response = await this.ormRepository.findAll({
 				offset: (pageIndex - 1) * pageSize,
 				limit: pageSize,
+				...conditions,
 			});
 
 			return response;
