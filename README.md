@@ -34,14 +34,14 @@ Abra um terminal na pasta onde se encontra o projeto, e execute o comando:
 ### Variaveis de ambiente
 Crie um arquivo com o nome `.env` e adicione o conteúdo abaixo:
 ```
-SERVER_PORT=27017 #porta usada pela aplicação
-SERVER_HOST=localhost #host do servidor
-MYSQL_HOST=localhost #host do banco de dados mysql
-MYSQL_PORT=3306 #porta usada pelo banco
-MYSQL_DATABASE=semfome/database #nome da base usada pela aplicação
-MYSQL_USER=node@api #Nome do usuario para acesso ao banco
-MYSQL_PASSWORD=node@semfome #senha do usuario para acesso ao banco
-APP_TIMEZONE='-03:00' #GMT Brasilia/Brasil
+SERVER_PORT=16671
+SERVER_HOST=localhost
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+MYSQL_DATABASE=semfome/database
+MYSQL_USER=node@api
+MYSQL_PASSWORD=node@semfome
+APP_TIMEZONE='-03:00'
 ```
 
 ### Banco de dados
