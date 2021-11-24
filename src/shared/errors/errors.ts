@@ -2,9 +2,9 @@ import Joi from 'joi';
 import { BadRequest, InternalServerError, NotFound, Unauthorized } from './http-status-errors';
 
 // Not Found
-export class PageNotFound extends NotFound {
+export class RouteNotFound extends NotFound {
 	constructor() {
-		super('Page not found.');
+		super('Route not found.');
 	}
 }
 
