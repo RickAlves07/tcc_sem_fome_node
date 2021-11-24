@@ -13,8 +13,9 @@ import {
 	ProvisionController,
 	ShipmentController,
 	UserController,
-	OrganizationController } from '@/presentation/controllers';
-import { PageNotFound, CannotStartApplication } from '@/shared/errors';
+	OrganizationController,
+	SignUpController } from '@/presentation/controllers';
+import { RouteNotFound, CannotStartApplication } from '@/shared/errors';
 export class Server {
 	app?: express.Application;
 	serverPort?: number;
@@ -55,7 +56,7 @@ export class Server {
 				res: express.Response,
 				next: express.NextFunction,
 			) => {
-				next(new PageNotFound);
+				next(new RouteNotFound);
 			}
 		);
 
@@ -101,7 +102,9 @@ export class Server {
 			container.resolve(OrganizationController),
 			container.resolve(ProvisionController),
 			container.resolve(ShipmentController),
-			container.resolve(UserController)
+			container.resolve(UserController),
+			container.resolve(SignUpController)
+
 		];
 	}
 }
