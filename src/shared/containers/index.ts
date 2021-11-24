@@ -8,6 +8,7 @@ import {
 	DbAddProvision, DbGetProvision, DbDeleteProvision, DbListProvisions, DbUpdateProvision,
 	DbAddShipment, DbGetShipment, DbDeleteShipment, DbListShipments, DbUpdateShipment,
 	DbAddUser, DbGetUser, DbDeleteUser, DbListUsers, DbUpdateUser,
+	DbSignUp,
 } from '@/data/usecases';
 
 // interfaces
@@ -18,6 +19,7 @@ import {
 	IAddProvision, IGetProvision, IDeleteProvision, IListProvisions, IUpdateProvision,
 	IAddShipment, IGetShipment, IDeleteShipment, IListShipments, IUpdateShipment,
 	IAddUser, IGetUser, IDeleteUser, IListUsers, IUpdateUser,
+	ISignUp
 } from '@/domain/usecases';
 
 // repositories
@@ -77,3 +79,6 @@ container.registerSingleton<IDeleteUser>('DeleteUser',DbDeleteUser);
 container.registerSingleton<IListUsers>('ListUsers',DbListUsers);
 container.registerSingleton<IUpdateUser>('UpdateUser',DbUpdateUser);
 container.registerSingleton<IUserRepository>('UserRepository',MySqlUserRepository);
+
+// sign-up
+container.registerSingleton<ISignUp>('SignUp',DbSignUp);
