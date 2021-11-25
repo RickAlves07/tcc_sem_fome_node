@@ -1,4 +1,4 @@
-import { AddUser, AddAddress, AddOrganization } from '@/domain/usecases';
+import { AddUser, AddAddress, AddOrganization, SignIn } from '@/domain/usecases';
 export interface ISignUp {
 	new: (userData: SignUp.Params) => Promise<SignUp.Result>;
 }
@@ -11,5 +11,5 @@ export namespace SignUp {
 		representatives?: AddUser.Params[],
 	};
 
-	export type Result = boolean;
+	export type Result = SignIn.Result;
 }

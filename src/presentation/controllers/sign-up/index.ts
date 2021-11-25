@@ -6,7 +6,7 @@ import { ok } from '@/shared/helper';
 import { ISignUp } from '@/domain/usecases';
 
 @injectable()
-@Controller('/sign-up')
+@Controller('/register')
 export class SignUpController extends BaseController {
 	constructor(
 		@inject('SignUp')

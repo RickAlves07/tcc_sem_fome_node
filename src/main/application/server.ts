@@ -14,7 +14,8 @@ import {
 	ShipmentController,
 	UserController,
 	OrganizationController,
-	SignUpController } from '@/presentation/controllers';
+	SignUpController,
+	SignInController} from '@/presentation/controllers';
 import { RouteNotFound, CannotStartApplication } from '@/shared/errors';
 export class Server {
 	app?: express.Application;
@@ -103,8 +104,8 @@ export class Server {
 			container.resolve(ProvisionController),
 			container.resolve(ShipmentController),
 			container.resolve(UserController),
-			container.resolve(SignUpController)
-
+			container.resolve(SignUpController),
+			container.resolve(SignInController)
 		];
 	}
 }
