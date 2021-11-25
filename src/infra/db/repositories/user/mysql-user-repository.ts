@@ -11,7 +11,7 @@ implements IUserRepository
 	}
 
 	public async findByEmail(email: string): Promise<User> {
-		return await super.findWithConditions({ where: { email: email }, attributes: { exclude: ['password']}});
+		return await super.findWithConditions({ where: { email: email }});
 	}
 
 	public async save(data: User, conditions?: {}): Promise<User> {
