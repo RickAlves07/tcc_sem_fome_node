@@ -8,17 +8,16 @@ export class RouteNotFound extends NotFound {
 	}
 }
 
+export class AccountNotFound extends NotFound {
+	constructor() {
+		super('Account not found.');
+	}
+}
 
 // Bad Request
 export class InvalidRequest extends BadRequest {
 	constructor(details: Joi.ValidationErrorItem[]) {
 		super('Invalid request data.', details);
-	}
-}
-
-export class EmailAlreadyRegistered extends BadRequest {
-	constructor() {
-		super('This email is already registered in another account');
 	}
 }
 
@@ -38,5 +37,24 @@ export class InternalDatabaseError extends InternalServerError {
 export class CannotStartApplication extends InternalServerError {
 	constructor(details: Error) {
 		super('Cannot start application.', details);
+	}
+}
+
+// Unauthorized
+export class InvalidUserPassword extends Unauthorized {
+	constructor() {
+		super('Invalid password.');
+	}
+}
+
+export class AccountNotActive extends Unauthorized {
+	constructor() {
+	  super('Account was not active');
+	}
+}
+
+export class EmailAlreadyRegistered extends Unauthorized {
+	constructor() {
+		super('This email is already registered in another account');
 	}
 }
