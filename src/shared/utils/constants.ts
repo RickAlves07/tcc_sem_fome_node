@@ -8,6 +8,10 @@ export const requestMethods = {
 
 export const emptyString = '';
 
+export const emptyArray = [];
+
+export const tempUserFiledData = 'waiting activation';
+
 export const donationPackagesStatus = {
 	WaitingATransporter: 'waiting a transporter',
 	WaitingForPickup:'waiting for pickup',
