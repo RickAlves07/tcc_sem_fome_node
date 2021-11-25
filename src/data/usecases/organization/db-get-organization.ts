@@ -17,4 +17,11 @@ export class DbGetOrganization implements IGetOrganization {
 
 		return organizationFound;
 	}
+
+	async getByAddressId(data: GetOrganization.Params): Promise<GetOrganization.Result> {
+
+		const organizationFound = await this.organizationRepository.findOrganizationByAddressId(data.address_id);
+
+		return organizationFound;
+	}
 }
