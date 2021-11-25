@@ -8,7 +8,7 @@ import {
 	DbAddProvision, DbGetProvision, DbDeleteProvision, DbListProvisions, DbUpdateProvision,
 	DbAddShipment, DbGetShipment, DbDeleteShipment, DbListShipments, DbUpdateShipment,
 	DbAddUser, DbGetUser, DbDeleteUser, DbListUsers, DbUpdateUser,
-	DbSignUp,
+	DbSignUp, DbSignIn,
 } from '@/data/usecases';
 
 // interfaces
@@ -19,7 +19,7 @@ import {
 	IAddProvision, IGetProvision, IDeleteProvision, IListProvisions, IUpdateProvision,
 	IAddShipment, IGetShipment, IDeleteShipment, IListShipments, IUpdateShipment,
 	IAddUser, IGetUser, IDeleteUser, IListUsers, IUpdateUser,
-	ISignUp
+	ISignUp, ISignIn
 } from '@/domain/usecases';
 
 // repositories
@@ -31,6 +31,8 @@ import {
 	IShipmentRepository, MySqlShipmentRepository,
 	IUserRepository, MySqlUserRepository,
 } from '@/infra/db/repositories';
+import { ICryptography, IHasher } from '@/infra/protocols';
+import { BcryptAdapter, JwtAdapter } from '@/infra/adapters';
 
 // address
 container.registerSingleton<IAddAddress>('AddAddress',DbAddAddress);
@@ -82,3 +84,10 @@ container.registerSingleton<IUserRepository>('UserRepository',MySqlUserRepositor
 
 // sign-up
 container.registerSingleton<ISignUp>('SignUp',DbSignUp);
+
+// sign-in
+container.registerSingleton<ISignIn>('SignIn',DbSignIn);
+
+// adapters
+container.registerSingleton<IHasher>('Hasher', BcryptAdapter);
+container.registerSingleton<ICryptography>('Cryptography', JwtAdapter);
