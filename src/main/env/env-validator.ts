@@ -31,7 +31,16 @@ export class EnvValidator {
 
 
 	@IsString()
+	@IsNotEmpty()
 	appTimezone: string;
+
+	@IsString()
+	@IsNotEmpty()
+	jwtSecret: string;
+
+	@IsInt()
+	@IsNotEmpty()
+	hashSalt: number;
 
 	constructor(props: envProps) {
 		Object.assign(this, props);
@@ -47,4 +56,6 @@ type envProps = {
 	mysqlUser: string;
 	mysqlPassword: string;
 	appTimezone: string;
+	jwtSecret: string;
+	hashSalt: number;
 }

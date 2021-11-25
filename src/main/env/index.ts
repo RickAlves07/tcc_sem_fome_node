@@ -12,4 +12,6 @@ export const env = new EnvValidator({
 	mysqlUser: (process.env.MYSQL_USER || ''),
 	mysqlPassword: (process.env.MYSQL_PASSWORD || ''),
 	appTimezone: (process.env.APP_TIMEZONE || ''),
+	jwtSecret: (process.env.JWT_SECRET || ''),
+	hashSalt: (process.env.HASH_SALT && parseInt(process.env.HASH_SALT, 10) || 1),
 });
