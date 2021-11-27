@@ -4,7 +4,6 @@ export interface IAddDonationPackage {
 
 export namespace AddDonationPackage {
 	export type Params = {
-		status: string;
 		total_items: number;
 		total_weight: number;
 		comments?: string;
