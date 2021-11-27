@@ -3,7 +3,7 @@ import { HttpRequest, HttpResponse } from '@/presentation/protocols';
 import { InvalidRequest } from '@/shared/errors';
 import { badRequest, ok } from '@/shared/helper';
 
-export const parametersValidator = (schema: Joi.Schema): any =>
+export const ParametersValidator = (schema: Joi.Schema): any =>
 	async (req: HttpRequest): Promise<HttpResponse> => {
 		const validation = schema.validate(req, {
 			abortEarly: false,
