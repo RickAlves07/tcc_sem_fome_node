@@ -1,9 +1,9 @@
 import Joi from 'joi';
-import { HttpRequest, HttpResponse } from '@/presentation/protocols';
-import { InvalidRequest } from '@/shared/errors';
+import { HttpRequest, HttpResponse, Middleware } from '@/presentation/protocols';
+import { ValidationError } from '@/shared/errors';
 import { badRequest, ok } from '@/shared/helper';
 
-export const ParametersValidator = (schema: Joi.Schema): any =>
+export const ParametersValidator = (schema: Joi.Schema): Middleware =>
 	async (req: HttpRequest): Promise<HttpResponse> => {
 		const validation = schema.validate(req, {
 			abortEarly: false,
@@ -12,7 +12,7 @@ export const ParametersValidator = (schema: Joi.Schema): any =>
 		});
 
 		if (validation.error) {
-			return badRequest(new InvalidRequest(validation.error.details));
+			return badRequest(new ValidationError(validation.error.details));
 		}
 
 		Object.assign(req, validation.value);
