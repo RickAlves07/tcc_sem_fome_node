@@ -16,10 +16,16 @@ export class AccountNotFound extends NotFound {
 
 // Bad Request
 export class InvalidRequest extends BadRequest {
-	constructor(details: Joi.ValidationErrorItem[]) {
-		super('Invalid request data.', details);
+	constructor(details: Error) {
+		super('Invalid request', details);
 	}
 }
+
+export class ValidationError extends BadRequest {
+	constructor(details: Joi.ValidationErrorItem[]) {
+	  super('Invalid request data', details);
+	}
+  }
 
 // Internal Server Error
 export class UnableConnectDatabase extends InternalServerError {
