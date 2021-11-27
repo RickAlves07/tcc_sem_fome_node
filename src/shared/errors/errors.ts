@@ -49,7 +49,19 @@ export class InvalidUserPassword extends Unauthorized {
 
 export class AccountNotActive extends Unauthorized {
 	constructor() {
-	  super('Account was not active');
+	  super('Account was not activated');
+	}
+}
+
+export class NoAuthTokenInHeader extends Unauthorized {
+	constructor() {
+	  super('No auth token in header');
+	}
+}
+
+export class InvalidToken extends Unauthorized {
+	constructor() {
+	  super('Invalid token');
 	}
 }
 
