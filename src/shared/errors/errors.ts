@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import Joi, { string } from 'joi';
 import { BadRequest, InternalServerError, NotFound, Unauthorized } from './http-status-errors';
 
 // Not Found
@@ -78,7 +78,7 @@ export class InvalidToken extends Unauthorized {
 }
 
 export class EmailAlreadyRegistered extends Unauthorized {
-	constructor(details ) {
+	constructor(details?: string) {
 		super('This email is already registered in another account', details);
 	}
 }

@@ -35,7 +35,7 @@ export class DbSignIn implements ISignIn {
 		const token = await this.generateAuthToken(userRegistered);
 
 		const loginData: LoginData = {
-			name: userRegistered.name,
+			userName: userRegistered.name,
 			profileType: userRegistered.profile_type,
 			token: token,
 		}
@@ -87,7 +87,7 @@ export class DbSignIn implements ISignIn {
 }
 
 type LoginData = {
-	name: string
+	userName: string
 	profileType: string
 	organizationName?: string
 	token: string,

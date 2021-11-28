@@ -9,7 +9,7 @@ export namespace SignIn {
 	};
 
 	export type Result = {
-		name: string,
+		userName: string,
 		profileType: string,
 		organizationName?: string,
 		token: string
