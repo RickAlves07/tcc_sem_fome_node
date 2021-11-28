@@ -16,7 +16,7 @@ export class ShipmentModel extends Model {
 
 	static associate(models) {
 		ShipmentModel.belongsTo(models.UserModel, { foreignKey: 'user_transporter_id', as: 'shipment_transporter_user'});
-		ShipmentModel.belongsTo(models.UserModel, { foreignKey: 'organization_distributor_id', as: 'shipment_distributor_user'});
+		ShipmentModel.belongsTo(models.OrganizationModel, { foreignKey: 'organization_distributor_id', as: 'organization_distributor_user'});
 		ShipmentModel.hasMany(models.DonationPackageModel, { foreignKey: 'id', as: 'shipment_donations_packages'});
 	}
 }
