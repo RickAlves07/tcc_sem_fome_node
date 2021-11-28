@@ -1,11 +1,16 @@
-import { injectable, inject } from 'tsyringe';
-import { Controller, Get, Post } from '@/presentation/decorators';
+import { profilesTypes } from './../../../shared/utils/constants';
+import { ICryptography } from '@/infra/protocols';
+import { injectable, inject, container } from 'tsyringe';
+import { Controller, Get, Patch, Post } from '@/presentation/decorators';
 import { BaseController, HttpRequest, HttpResponse } from '@/presentation/protocols';
 import { ok } from '@/shared/helper';
-import { IAddDonationPackage, IListDonationsPackages } from '@/domain/usecases';
+import { IAddDonationPackage, IListDonationsPackages, IUpdateDonationPackage } from '@/domain/usecases';
+import { AuthMiddleware, ParametersValidator } from '@/presentation/middlewares';
+import { JwtAdapter } from '@/infra/adapters';
+import { addDonationSchema, listDonationsSchema, updateDonationScheme } from './parameters-schemas';
 
 @injectable()
-@Controller('/donation')
+@Controller('/donations')
 export class DonationPackageController extends BaseController {
 	constructor(
 		@inject('AddDonationPackage')
@@ -13,21 +18,41 @@ export class DonationPackageController extends BaseController {
 
 		@inject('ListDonationsPackages')
 		private listDonationsPackages: IListDonationsPackages,
+
+		@inject('UpdateDonationPackage')
+		private updateDonationPackage: IUpdateDonationPackage,
+
 	) {
 		super();
 	}
 
-	@Post('/')
+	@Post('/new', [
+		AuthMiddleware(container.resolve(JwtAdapter), Object.values(profilesTypes)),
+		ParametersValidator(addDonationSchema)
+	])
 	async store(req: HttpRequest): Promise<HttpResponse> {
 
 		const response = await this.addDonationPackage.add(req.body);
 		return ok(response);
 	}
 
-	@Get('/list')
+	@Get('/list', [
+		AuthMiddleware(container.resolve(JwtAdapter), Object.values(profilesTypes)),
+		ParametersValidator(listDonationsSchema)
+	])
 	async index(req: HttpRequest): Promise<HttpResponse> {
 
-		const response = await this.listDonationsPackages.list(req.query);
+		const response = await this.listDonationsPackages.list({...req.query, ...req.body});
+		return ok(response);
+	}
+
+	@Patch('/update', [
+		AuthMiddleware(container.resolve(JwtAdapter), Object.values(profilesTypes)),
+		ParametersValidator(updateDonationScheme)
+	])
+	async update(req: HttpRequest): Promise<HttpResponse> {
+
+		const response = await this.updateDonationPackage.update(req.body);
 		return ok(response);
 	}
 }
