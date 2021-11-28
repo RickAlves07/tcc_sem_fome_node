@@ -15,4 +15,14 @@ implements IDonationPackageRepository
 
 		return response;
 	}
+
+	public async findByStatus(pageIndex: number, pageSize: number, conditions?: {}) : Promise<DonationPackage[] | null> {
+		const response = await super.findAll(
+			pageIndex,
+			pageSize,
+			{ where: conditions },
+		);
+
+		return response;
+	}
 }
