@@ -25,7 +25,13 @@ export class ValidationError extends BadRequest {
 	constructor(details: Joi.ValidationErrorItem[]) {
 	  super('Invalid request data', details);
 	}
-  }
+}
+
+export class InvalidAction extends BadRequest {
+	constructor(details?: string) {
+	  super('Invalid action', details);
+	}
+}
 
 // Internal Server Error
 export class UnableConnectDatabase extends InternalServerError {
@@ -48,31 +54,37 @@ export class CannotStartApplication extends InternalServerError {
 
 // Unauthorized
 export class InvalidUserPassword extends Unauthorized {
-	constructor() {
-		super('Invalid password.');
+	constructor(details?: string) {
+		super('Invalid password.', details);
 	}
 }
 
 export class AccountNotActive extends Unauthorized {
-	constructor() {
-	  super('Account was not activated');
+	constructor(details?: string) {
+	  super('Account was not activated', details);
 	}
 }
 
 export class NoAuthTokenInHeader extends Unauthorized {
-	constructor() {
-	  super('No auth token in header');
+	constructor(details?: string) {
+	  super('No auth token in header', details);
 	}
 }
 
 export class InvalidToken extends Unauthorized {
-	constructor() {
-	  super('Invalid token');
+	constructor(details) {
+	  super('Invalid token', details);
 	}
 }
 
 export class EmailAlreadyRegistered extends Unauthorized {
-	constructor() {
-		super('This email is already registered in another account');
+	constructor(details ) {
+		super('This email is already registered in another account', details);
+	}
+}
+
+export class NoPermission extends Unauthorized {
+	constructor(details?: string) {
+		super('This profile has not permission', details);
 	}
 }
