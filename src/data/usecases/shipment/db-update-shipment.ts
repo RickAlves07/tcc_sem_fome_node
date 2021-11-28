@@ -12,21 +12,29 @@ export class DbUpdateShipment implements IUpdateShipment {
 
 	async update(data: UpdateShipment.Params): Promise<UpdateShipment.Result> {
 
-		const {
-			id,
-			user_transporter_id,
-			user_distributor_id,
-			collected_at,
-			delivered_at,
-		} = data
+		if(!data.collected_at){
+			await this.updateCollectedDate(data.collected_at, data.shipment_id)
+		}
 
-		const updatedShipment = await this.shipmentRepository.update({
-			user_transporter_id,
-			user_distributor_id,
-			collected_at,
-			delivered_at,
-		}, id );
+		if(!data.delivered_at){
+			await this.updateCollectedDate(data.delivered_at, data.shipment_id)
+		}
 
-		return updatedShipment;
+		if(!data.delivered_at){
+			await this.updateCollectedDate(data.delivered_at, data.shipment_id)
+		}
+
+		return await this.shipmentRepository.findById(data.shipment_id);
+	}
+
+	private async updateCollectedDate(collectedAt: Date, shipmentId: number) {
+		await this.updateShipment({ collected_at: collectedAt}, shipmentId)
+	}
+
+	private async updateDeliveredDate(deliveredAt: Date, shipmentId: number) {
+		await this.updateShipment({ delivered_at: deliveredAt}, shipmentId)
+	}
+	private async updateShipment(valuesToUpdate: {}, shipmentId: number) {
+		return await this.shipmentRepository.update(valuesToUpdate, shipmentId)
 	}
 }

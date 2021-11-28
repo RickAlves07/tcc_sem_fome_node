@@ -12,8 +12,11 @@ export class DbAddShipment implements IAddShipment {
 
 	async add(data: AddShipment.Params): Promise<AddShipment.Result> {
 
-		await this.shipmentRepository.save(data);
+		const shipmentToSave = {
+			user_transporter_id: data.auth_user.user_id,
+			organization_distributor_id: data.organization_distributor_id,
+		}
 
-		return true;
+		return this.shipmentRepository.save(shipmentToSave);
 	}
 }
