@@ -45,34 +45,28 @@ export class DbSignUp implements ISignUp {
 
 		const savedUser = await this.saveUser(data.user, savedAddress.id);
 
-		if(data.organization)
-		{
+		if(data.organization) {
 			await this.saveOrganization(data.organization, savedUser.id, savedAddress.id);
 		}
 
-		if(data.representatives)
-		{
+		if(data.representatives) {
 			await this.saveRepresentatives(data.representatives, savedAddress.id, savedUser);
 		}
 
 		return await this.loginUser(data.user)
 	}
 
-	private async isUserEmailAlreadyRegistered(userData: User) : Promise<void>
-	{
-		if(await this.getUser.get({email: userData.email}))
-		{
+	private async isUserEmailAlreadyRegistered(userData: User) : Promise<void> {
+		if(await this.getUser.get({email: userData.email})) {
 			throw new EmailAlreadyRegistered();
 		}
 	}
 
-	private async saveAddress(addressData: Address) : Promise<Address>
-	{
+	private async saveAddress(addressData: Address) : Promise<Address> {
 		return await this.addAddress.add(addressData);
 	}
 
-	private async saveUser(userData: User, savedAddressId: number) : Promise<User>
-	{
+	private async saveUser(userData: User, savedAddressId: number) : Promise<User> {
 		return await this.addUser.add({
 			...userData,
 			address_id: savedAddressId,
@@ -80,8 +74,7 @@ export class DbSignUp implements ISignUp {
 		});
 	}
 
-	private async saveOrganization(organizationData: Organization, ownerId: number, addressId: number) : Promise<Organization>
-	{
+	private async saveOrganization(organizationData: Organization, ownerId: number, addressId: number) : Promise<Organization> {
 		return await this.addOrganization.add({
 			...organizationData,
 			owner_id: ownerId,
@@ -89,8 +82,8 @@ export class DbSignUp implements ISignUp {
 		});
 	}
 
-	private async saveRepresentatives(representativesData: User[], savedAddressId: number, ownerUserData: User) : Promise<User[]>
-	{
+	private async saveRepresentatives(representativesData: User[], savedAddressId: number, ownerUserData: User) : Promise<User[]> {
+
 		let savedRepresentatives: User[] = [];
 		representativesData.forEach(async userData => {
 			userData.password = await this.hasher.hash(tempUserFiledData);
@@ -102,8 +95,7 @@ export class DbSignUp implements ISignUp {
 		return savedRepresentatives;
 	}
 
-	private async loginUser(userData: User) : Promise<SignIn.Result>
-	{
+	private async loginUser(userData: User) : Promise<SignIn.Result> {
 		return await this.signIn.login({email: userData.email, password: userData.password});
 	}
 }

@@ -15,6 +15,7 @@ export const ExpressMiddlewaresAdapter = (middleware: Middleware) => {
 		};
 		const httpResponse = await middleware(httpRequest);
 		if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {
+			req.body = { ...req.body, ...httpResponse.body }
 			next();
 		} else {
 			res.status(httpResponse.statusCode).json({

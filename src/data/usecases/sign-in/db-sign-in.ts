@@ -75,7 +75,9 @@ export class DbSignIn implements ISignIn {
 
 	private async generateAuthToken(userData: User) : Promise<string>
 	{
-		return await this.cryptography.encrypt({id: userData.id, profile_type: userData.profile_type});
+		return await this.cryptography.encrypt({
+			user_id: userData.id,
+			profile_type: userData.profile_type});
 	}
 
 	private async getUserOrganization(userData: User) : Promise<Organization>
