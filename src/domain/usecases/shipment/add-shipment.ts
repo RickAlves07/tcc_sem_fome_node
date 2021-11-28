@@ -1,14 +1,14 @@
+import { AuthUser } from '@/domain/models/auth';
+import { Shipment } from '@/domain/models/shipment';
 export interface IAddShipment {
 	add: (shipmentData: AddShipment.Params) => Promise<AddShipment.Result>;
 }
 
 export namespace AddShipment {
 	export type Params = {
-		user_transporter_id: number;
-		user_distributor_id: number;
-		collected_at: Date | null;
-		delivered_at: Date | null;
+		auth_user: AuthUser,
+		organization_distributor_id: number;
 	};
 
-	export type Result = boolean;
+	export type Result = Shipment;
 }

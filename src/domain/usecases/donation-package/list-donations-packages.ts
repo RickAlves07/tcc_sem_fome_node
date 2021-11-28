@@ -1,3 +1,4 @@
+import { AuthUser } from '@/domain/models/auth';
 import { DonationPackage } from '@/domain/models/donation-package';
 
 export interface IListDonationsPackages {
@@ -6,8 +7,10 @@ export interface IListDonationsPackages {
 
 export namespace ListDonationsPackages {
 	export type Params = {
+		auth_user: AuthUser,
 		pageIndex: number;
 		pageSize: number;
+		route: string;
 		conditions?: {};
 	};
 
