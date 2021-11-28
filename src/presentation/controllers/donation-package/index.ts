@@ -52,7 +52,7 @@ export class DonationPackageController extends BaseController {
 	])
 	async update(req: HttpRequest): Promise<HttpResponse> {
 
-		const response = await this.updateDonationPackage.update(req.body);
+		const response = await this.updateDonationPackage.updateData(req.body);
 		return ok(response);
 	}
 }
