@@ -1,4 +1,5 @@
 import { InternalDatabaseError } from '@/shared/errors';
+import { number } from 'joi';
 import { ModelStatic } from '../models/model-type';
 import { IBaseRepository } from './base-repository';
 
@@ -49,8 +50,8 @@ export class MySqlBaseRepository<T extends {}> implements IBaseRepository<T>
 	public async findAll(pageIndex: number, pageSize: number, conditions?: {}): Promise<T[]> {
 		try {
 			const response = await this.ormRepository.findAll({
-				offset: (pageIndex - 1) * pageSize,
-				limit: pageSize,
+				offset: Number((pageIndex - 1) * pageSize),
+				limit: Number(pageSize),
 				...conditions,
 			});
 
@@ -60,9 +61,9 @@ export class MySqlBaseRepository<T extends {}> implements IBaseRepository<T>
 		}
 	}
 
-	public async update(data: T, conditions: {}): Promise<T> {
+	public async update(data: {}, conditions: {}): Promise<T> {
 		try {
-			const response = await this.ormRepository.update(data, { where: conditions});
+			const response = await this.ormRepository.update(data, { where: conditions });
 
 			return response;
 		} catch (error) {
