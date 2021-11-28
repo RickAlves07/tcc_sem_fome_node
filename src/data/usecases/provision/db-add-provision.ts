@@ -12,8 +12,6 @@ export class DbAddProvision implements IAddProvision {
 
 	async add(data: AddProvision.Params): Promise<AddProvision.Result> {
 
-		await this.provisionRepository.save(data);
-
-		return true;
+		return await this.provisionRepository.save(data);
 	}
 }
