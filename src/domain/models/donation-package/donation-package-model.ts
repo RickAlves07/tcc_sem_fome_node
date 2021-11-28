@@ -10,7 +10,7 @@ export class DonationPackageModel extends Model {
 			scheduled_at: DataTypes.DATE,
 		}, {
 			sequelize: connection,
-			tableName: 'donations-packages'
+			tableName: 'donations_packages'
 		})
 		return DonationPackageModel;
 	}
@@ -19,6 +19,7 @@ export class DonationPackageModel extends Model {
 		DonationPackageModel.belongsTo(models.UserModel, { foreignKey: 'user_donor_id', as: 'donation_user'});
 		DonationPackageModel.belongsTo(models.ShipmentModel, { foreignKey: 'shipment_id', as: 'donation_shipment'});
 		DonationPackageModel.belongsTo(models.AddressModel, { foreignKey: 'address_donor_id', as: 'donation_address'});
+		DonationPackageModel.belongsTo(models.OrganizationModel, { foreignKey: 'organization_distributor_id', as: 'donation_organization'});
 		DonationPackageModel.hasMany(models.ProvisionModel, { foreignKey: 'id', as: 'donation_provisions'});
 	}
 }

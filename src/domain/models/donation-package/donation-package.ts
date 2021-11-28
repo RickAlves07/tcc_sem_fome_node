@@ -7,6 +7,7 @@ export type DonationPackage = {
 	shipment_id?: number | null;
 	user_donor_id: number;
 	address_donor_id: number;
+	organization_distributor_id: number;
 	scheduled_at: Date;
 	created_at?: Date;
 	updated_at?: Date;
