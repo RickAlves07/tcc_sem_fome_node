@@ -52,6 +52,7 @@ export class DbAddDonationPackage implements IAddDonationPackage {
 			total_weight: totalWeight,
 			user_donor_id: userData.id,
 			address_donor_id: userData.address_id,
+			organization_distributor_id: data.organization_distributor_id,
 			scheduled_at: data.scheduled_at,
 			comments: (data.comments !== emptyString) ? data.comments : null,
 		}
