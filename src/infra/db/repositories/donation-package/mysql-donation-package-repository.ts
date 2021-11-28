@@ -21,6 +21,12 @@ implements IDonationPackageRepository
 			pageIndex,
 			pageSize,
 			{ where: conditions },
+			{ include: [
+				{ association: 'donation_address' },
+				{ association: 'donation_user', attributes: {exclude: ['password']}},
+				{ association: 'donation_organization' },
+				{ association: 'donation_provisions' },
+			]}
 		);
 
 		return response;
