@@ -12,7 +12,7 @@ module.exports = {
 		return queryInterface.bulkInsert(shipmentsTable, [{
 			id: 1,
 			user_transporter_id: 2,
-			user_distributor_id: 3,
+			organization_distributor_id: 3,
 			collected_at: collected_1,
 			delivered_at: delivered_1,
 			created_at: new Date(),
@@ -20,7 +20,7 @@ module.exports = {
 		}, {
 			id: 2,
 			user_transporter_id: 2,
-			user_distributor_id: 3,
+			organization_distributor_id: 3,
 			collected_at: collected_2,
 			delivered_at: null,
 			created_at: new Date(),
@@ -28,7 +28,7 @@ module.exports = {
 		}, {
 			id: 3,
 			user_transporter_id: 2,
-			user_distributor_id: 3,
+			organization_distributor_id: 3,
 			collected_at: null,
 			delivered_at: null,
 			created_at: new Date(),

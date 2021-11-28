@@ -17,7 +17,7 @@ module.exports = {
 				onUpdate: 'CASCADE',
 				onDelete: 'SET NULL'
 			},
-			user_distributor_id: {
+			organization_distributor_id: {
 				type: Sequelize.INTEGER,
 				allowNull: true,
 				references: { model: 'users', key: 'id'},
