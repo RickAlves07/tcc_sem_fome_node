@@ -7,6 +7,7 @@ import { User } from '@/domain/models/user';
 import { AccountNotFound } from '@/shared/errors';
 import { IAddProvision } from '@/domain/usecases';
 import { donationPackagesStatus, emptyString } from '@/shared/utils/constants';
+import { AuthUser } from '@/domain/models/auth';
 
 @injectable()
 export class DbAddDonationPackage implements IAddDonationPackage {
@@ -28,7 +29,7 @@ export class DbAddDonationPackage implements IAddDonationPackage {
 
 		const savedDonation = await this.saveDonation(data, userData);
 
-		await this.saveProvisions(data.provisions, savedDonation);
+		await this.saveProvisions(data.provisions, savedDonation, data.auth_user);
 
 		return true;
 	}
@@ -78,11 +79,12 @@ export class DbAddDonationPackage implements IAddDonationPackage {
 		return totalWeight;
 	}
 
-	private async saveProvisions(provisions: Provision[], savedDonation: DonationPackage) : Promise<Provision[]> {
+	private async saveProvisions(provisions: Provision[], savedDonation: DonationPackage, authUser: AuthUser) : Promise<Provision[]> {
 
 		let savedProvisions: Provision[] = [];
 		provisions.forEach(async provision => {
 			savedProvisions.push(await this.addProvision.add({
+				auth_user: authUser,
 				...provision,
 				donation_package_id: savedDonation.id,
 			}))

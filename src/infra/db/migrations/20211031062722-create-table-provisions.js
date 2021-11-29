@@ -18,7 +18,7 @@ module.exports = {
 				type: Sequelize.INTEGER,
 				allowNull: false,
 			},
-			weight: {
+			unit_weight: {
 				type: Sequelize.FLOAT,
 				allowNull: false,
 			},

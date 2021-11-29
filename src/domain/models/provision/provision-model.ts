@@ -5,7 +5,7 @@ export class ProvisionModel extends Model {
 		ProvisionModel.init({
 			description: DataTypes.STRING,
 			quantity: DataTypes.INTEGER,
-			weight: DataTypes.FLOAT,
+			unit_weight: DataTypes.FLOAT,
 			total_weight: DataTypes.FLOAT,
 			expiration_date: DataTypes.DATE,
 		}, {

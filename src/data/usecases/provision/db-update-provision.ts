@@ -16,7 +16,7 @@ export class DbUpdateProvision implements IUpdateProvision {
 			id,
 			description,
 			quantity,
-			weight,
+			unit_weight,
 			total_weight,
 			donation_package_id,
 			expiration_date,
@@ -25,7 +25,7 @@ export class DbUpdateProvision implements IUpdateProvision {
 		const updatedProvision = await this.provisionRepository.update({
 			description,
 			quantity,
-			weight,
+			unit_weight,
 			total_weight,
 			donation_package_id,
 			expiration_date,

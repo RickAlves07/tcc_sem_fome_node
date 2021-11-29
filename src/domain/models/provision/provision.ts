@@ -2,7 +2,7 @@ export type Provision = {
 	id?: number;
 	description: string;
 	quantity: number;
-	weight: number;
+	unit_weight: number;
 	total_weight: number;
 	donation_package_id: number;
 	expiration_date: Date;

@@ -33,7 +33,6 @@ export const registerSchema = Joi.object({
 		representatives: Joi.array().items( Joi.object({
 			name: Joi.string().required(),
 			email: Joi.string().email().required(),
-			phone_number: Joi.string().required(),
 		})).optional(),
 	}),
 });

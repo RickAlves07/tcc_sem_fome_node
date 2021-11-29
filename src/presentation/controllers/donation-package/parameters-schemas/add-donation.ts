@@ -7,7 +7,7 @@ export const addDonationSchema = Joi.object({
 		provisions: Joi.array().items( Joi.object({
 			description: Joi.string().required(),
 			quantity: Joi.number().integer().required(),
-			weight: Joi.number().required(),
+			unit_weight: Joi.number().required(),
 			total_weight: Joi.number().required(),
 			expiration_date: Joi.date().required(),
 		})).required(),

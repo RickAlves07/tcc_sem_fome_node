@@ -72,7 +72,7 @@ export class NoAuthTokenInHeader extends Unauthorized {
 }
 
 export class InvalidToken extends Unauthorized {
-	constructor(details) {
+	constructor(details?) {
 	  super('Invalid token', details);
 	}
 }
