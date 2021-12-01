@@ -48,6 +48,13 @@ export const donationsByStatusToReturnByRouteParam = {
 		donationPackagesStatus.Received,
 	],
 }
+export const statusToReturnByRouteParamList = {
+	InProgress:'in-progress',
+	History: 'history',
+	Available: 'available',
+	onTheWay:'on-the-way',
+	Received: 'received',
+}
 
 export const profilesTypes = {
 	Donor: 'donor',

@@ -1,6 +1,7 @@
 import { IDonationPackageRepository } from '.';
 import { MySqlBaseRepository } from '@/shared/infra/db/repositories';
 import { DonationPackage, DonationPackageModel } from '@/domain/models/donation-package';
+import { where } from 'sequelize/types';
 
 export class MySqlDonationPackageRepository extends MySqlBaseRepository<DonationPackage>
 implements IDonationPackageRepository
@@ -16,7 +17,7 @@ implements IDonationPackageRepository
 		return response;
 	}
 
-	public async findByStatus(pageIndex: number, pageSize: number, conditions?: {}) : Promise<DonationPackage[] | null> {
+	public async findByStatus(pageIndex: number, pageSize: number, conditions?: {}, conditionsTransporter?: {}) : Promise<DonationPackage[] | null> {
 		const response = await super.findAll(
 			pageIndex,
 			pageSize,
@@ -26,7 +27,7 @@ implements IDonationPackageRepository
 				{ association: 'donation_user', attributes: {exclude: ['password']}},
 				{ association: 'donation_organization' },
 				{ association: 'donation_provisions' },
-				{ association: 'donation_shipment' },
+				{ association: 'donation_shipment', where: { conditionsTransporter }},
 			]},
 		);
 
