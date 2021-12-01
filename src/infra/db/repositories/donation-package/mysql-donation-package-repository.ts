@@ -21,19 +21,20 @@ implements IDonationPackageRepository
 		const response = await super.findAll(
 			pageIndex,
 			pageSize,
-			{ where: conditions },
+			{ where: conditions, order: [['created_at', 'DESC']] },
 			{ include: [
 				{ association: 'donation_address' },
 				{
 					association: 'donation_user',
 					attributes: { exclude: ['password']},
-					include: [{ association: 'user_organization' }]
+					include: [{ association: 'user_organization',
+					include: [{ association: 'organization_owner_user' }] }]
 				},
-				{ association: 'donation_organization' },
+				{ association: 'donation_organization', include: [{ association: 'organization_owner_user' }] },
 				{ association: 'donation_provisions' },
 				{
 					association: 'donation_shipment',
-					where: conditionsTransporter, include: [{ association: 'shipment_transporter_user', include: [{ association: 'user_organization' }] }]
+					where: conditionsTransporter, include: [{ association: 'shipment_transporter_user', include: [{ association: 'user_organization', include: [{ association: 'organization_owner_user' }] }] }]
 				},
 			]},
 		);
