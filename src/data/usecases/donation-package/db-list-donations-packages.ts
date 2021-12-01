@@ -28,7 +28,8 @@ export class DbListDonationsPackages implements IListDonationsPackages {
 
 		let conditionsTransporter: any;
 
-		if(params.auth_user.profile_type === profilesTypes.Transporter){
+		if(params.auth_user.profile_type === profilesTypes.Transporter &&
+			statusToReturnByRouteParamList.ShipmentInProgress){
 			conditionsTransporter = {
 				user_transporter_id: params.auth_user.user_id,
 			}
