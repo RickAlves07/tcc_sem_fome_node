@@ -33,7 +33,8 @@ implements IDonationPackageRepository
 				{ association: 'donation_provisions' },
 				{
 					association: 'donation_shipment',
-					where: conditionsTransporter, include: [{ association: 'shipment_transporter_user', include: [{ association: 'user_organization' }] }] },
+					where: conditionsTransporter, include: [{ association: 'shipment_transporter_user', include: [{ association: 'user_organization' }] }]
+				},
 			]},
 		);
 
