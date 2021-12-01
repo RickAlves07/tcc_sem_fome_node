@@ -4,6 +4,7 @@ export type Shipment = {
 	organization_distributor_id: number;
 	collected_at?: Date | null;
 	delivered_at?: Date | null;
+	received_at?: Date | null;
 	created_at?: Date;
 	updated_at?: Date;
 };

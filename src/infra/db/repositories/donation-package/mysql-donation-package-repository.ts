@@ -24,10 +24,16 @@ implements IDonationPackageRepository
 			{ where: conditions },
 			{ include: [
 				{ association: 'donation_address' },
-				{ association: 'donation_user', attributes: {exclude: ['password']}},
+				{
+					association: 'donation_user',
+					attributes: { exclude: ['password']},
+					include: [{ association: 'user_organization' }]
+				},
 				{ association: 'donation_organization' },
 				{ association: 'donation_provisions' },
-				{ association: 'donation_shipment', where: conditionsTransporter },
+				{
+					association: 'donation_shipment',
+					where: conditionsTransporter, include: [{ association: 'shipment_transporter_user', include: [{ association: 'user_organization' }] }] },
 			]},
 		);
 

@@ -83,7 +83,7 @@ export class DbUpdateDonationPackage implements IUpdateDonationPackage {
 		){
 			throw new InvalidAction(`Profile ${authUser.profile_type} cannot confirm received`);
 		}
-		await this.updateShipmentData(savedDonation, authUser, { delivered_at: new Date()});
+		await this.updateShipmentData(savedDonation, authUser, { received_at: new Date()});
 		return await this.updateDonation(savedDonation, donationPackagesStatus.Received);
 	}
 
@@ -197,7 +197,7 @@ export class DbUpdateDonationPackage implements IUpdateDonationPackage {
 
 	private async updateShipmentData(savedDonation: DonationPackage, authUser: AuthUser, dataToUpdate: {}) {
 
-		await this.updateShipment.update( {
+		const teste = await this.updateShipment.update( {
 			auth_user: authUser,
 			shipment_id: savedDonation.shipment_id,
 			...dataToUpdate,

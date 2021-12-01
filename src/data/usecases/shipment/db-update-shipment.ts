@@ -12,16 +12,16 @@ export class DbUpdateShipment implements IUpdateShipment {
 
 	async update(data: UpdateShipment.Params): Promise<UpdateShipment.Result> {
 
-		if(!data.collected_at){
+		if(data.collected_at !== undefined){
 			await this.updateCollectedDate(data.collected_at, data.shipment_id)
 		}
 
-		if(!data.delivered_at){
-			await this.updateCollectedDate(data.delivered_at, data.shipment_id)
+		if(data.delivered_at !== undefined){
+			await this.updateDeliveredDate(data.delivered_at, data.shipment_id)
 		}
 
-		if(!data.delivered_at){
-			await this.updateCollectedDate(data.delivered_at, data.shipment_id)
+		if(data.received_at !== undefined){
+			await this.updateReceivedDate(data.received_at, data.shipment_id)
 		}
 
 		return await this.shipmentRepository.findById(data.shipment_id);
@@ -34,7 +34,11 @@ export class DbUpdateShipment implements IUpdateShipment {
 	private async updateDeliveredDate(deliveredAt: Date, shipmentId: number) {
 		await this.updateShipment({ delivered_at: deliveredAt}, shipmentId)
 	}
-	private async updateShipment(valuesToUpdate: {}, shipmentId: number) {
-		return await this.shipmentRepository.update(valuesToUpdate, shipmentId)
+
+	private async updateReceivedDate(receivedAt: Date, shipmentId: number) {
+		await this.updateShipment({ received_at: receivedAt}, shipmentId)
+	}
+	private async updateShipment(valuesToUpdate: any, shipmentId: number) {
+		return await this.shipmentRepository.update(valuesToUpdate, { id: shipmentId})
 	}
 }

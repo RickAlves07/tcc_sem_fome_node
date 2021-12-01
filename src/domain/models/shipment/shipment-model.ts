@@ -5,6 +5,7 @@ export class ShipmentModel extends Model {
 		ShipmentModel.init({
 			collected_at: DataTypes.DATE,
 			delivered_at: DataTypes.DATE,
+			received_at: DataTypes.DATE,
 			created_at: DataTypes.DATE,
 			updated_at: DataTypes.DATE,
 		}, {

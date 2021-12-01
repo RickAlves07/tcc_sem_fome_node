@@ -10,6 +10,7 @@ export namespace UpdateShipment {
 		shipment_id: number;
 		collected_at?: Date | null;
 		delivered_at?: Date | null;
+		received_at?: Date | null;
 	};
 
 	export type Result = Shipment;

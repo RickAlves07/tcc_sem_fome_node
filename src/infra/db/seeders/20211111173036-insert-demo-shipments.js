@@ -1,10 +1,10 @@
 'use strict';
 const shipmentsTable = 'shipments';
 const collected_1 = new Date();
-const delivered_1 = new Date();
+const received_1 = new Date();
 const collected_2 = new Date();
 collected_1.setDate(collected_1.getDate() + 1),
-delivered_1.setDate(delivered_1.getDate() + 1),
+received_1.setDate(received_1.getDate() + 1),
 collected_2.setDate(collected_2.getDate() + 2),
 
 module.exports = {
@@ -14,7 +14,8 @@ module.exports = {
 			user_transporter_id: 2,
 			organization_distributor_id: 3,
 			collected_at: collected_1,
-			delivered_at: delivered_1,
+			delivered_at: null,
+			received_at: received_1,
 			created_at: new Date(),
 			updated_at: new Date(),
 		}, {
@@ -23,6 +24,7 @@ module.exports = {
 			organization_distributor_id: 3,
 			collected_at: collected_2,
 			delivered_at: null,
+			received_at: null,
 			created_at: new Date(),
 			updated_at: new Date(),
 		}, {
@@ -31,6 +33,7 @@ module.exports = {
 			organization_distributor_id: 3,
 			collected_at: null,
 			delivered_at: null,
+			received_at: null,
 			created_at: new Date(),
 			updated_at: new Date(),
 		}, ], {});
