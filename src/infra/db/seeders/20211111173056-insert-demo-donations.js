@@ -11,7 +11,7 @@ module.exports = {
 	up: (queryInterface, Sequelize) => {
 		return queryInterface.bulkInsert(donationsPackagesTable, [{
 			id: 1,
-			status: 'received',
+			status: 'Recebido',
 			total_items: 4,
 			total_weight: 15.5,
 			comments: 'alguma observação',
@@ -24,7 +24,7 @@ module.exports = {
 			updated_at: new Date(),
 		}, {
 			id: 2,
-			status: 'on delivery route',
+			status: 'Em rota de Entrega',
 			total_items: 8,
 			total_weight: 20,
 			comments: null,
@@ -37,7 +37,7 @@ module.exports = {
 			updated_at: new Date(),
 		}, {
 			id: 3,
-			status: 'waiting a transporter',
+			status: 'Aguardando um Transportador',
 			total_items: 3,
 			total_weight: 10.4,
 			comments: 'algum comentario',

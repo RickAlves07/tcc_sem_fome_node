@@ -3,7 +3,7 @@ export interface IBaseRepository<T> {
 	save(data: T): Promise<T>;
 	findById(id: number): Promise<T | null>;
 	findWithConditions(conditions: {})
-	findAll(pageIndex: number, pageSize: number, conditions?: {}): Promise<T[]>;
+	findAll(pageIndex: number, pageSize: number, conditions?: {}, includes?: {}, order?: {}): Promise<T[]>;
 	update(data: {}, conditions: {}): Promise<T>;
 	delete(conditions: {}): Promise<void>;
 }

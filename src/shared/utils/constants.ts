@@ -10,19 +10,18 @@ export const emptyString = '';
 
 export const emptyArray = [];
 
-export const tempUserFiledData = 'waiting activation';
+export const tempUserFiledData = 'Aguardando Ativação';
 
 export const donationPackagesStatus = {
-	WaitingATransporter: 'waiting a transporter',
-	WaitingForPickup: 'waiting for pickup',
-	OnDeliveryRoute: 'on delivery route',
-	Delivered: 'delivered',
-	Received: 'received',
-	ReturningToDonor: 'returning to donor',
-	Returned: 'returned',
-	Canceled: 'canceled',
+	WaitingATransporter: 'Aguardando um Transportador',
+	WaitingForPickup: 'Aguardando Coleta',
+	OnDeliveryRoute: 'Em rota de Entrega',
+	Delivered: 'Entregue',
+	Received: 'Recebido',
+	ReturningToDonor: 'Retornado ao Doador',
+	Returned: 'Devolvido',
+	Canceled: 'Cancelado',
 }
-
 export const donationsByStatusToReturnByRouteParam = {
 	'in-progress': [
 		donationPackagesStatus.WaitingATransporter,

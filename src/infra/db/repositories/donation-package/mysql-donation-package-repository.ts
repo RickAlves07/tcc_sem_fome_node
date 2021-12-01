@@ -26,7 +26,8 @@ implements IDonationPackageRepository
 				{ association: 'donation_user', attributes: {exclude: ['password']}},
 				{ association: 'donation_organization' },
 				{ association: 'donation_provisions' },
-			]}
+				{ association: 'donation_shipment' },
+			]},
 		);
 
 		return response;

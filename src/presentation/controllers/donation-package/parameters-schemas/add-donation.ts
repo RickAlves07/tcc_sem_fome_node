@@ -4,6 +4,7 @@ export const addDonationSchema = Joi.object({
 	body: Joi.object({
 		comments: Joi.string().optional().allow(null, ''),
 		scheduled_at: Joi.date().required(),
+		organization_distributor_id: Joi.number().required(),
 		provisions: Joi.array().items( Joi.object({
 			description: Joi.string().required(),
 			quantity: Joi.number().integer().required(),

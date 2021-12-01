@@ -1,5 +1,5 @@
 import { Shipment } from '@/domain/models/shipment';
-import { donationPackagesStatus } from '@/shared/utils/constants';
+import { donationPackagesStatus, profilesTypes } from '@/shared/utils/constants';
 import { DonationPackage } from '@/domain/models/donation-package';
 import { injectable, inject } from 'tsyringe';
 import { UpdateDonationPackage, IUpdateDonationPackage, IAddShipment, IUpdateShipment, IDeleteShipment } from '@/domain/usecases';
@@ -62,9 +62,7 @@ export class DbUpdateDonationPackage implements IUpdateDonationPackage {
 
 	private async confirmDonationCollected(savedDonation: DonationPackage, authUser: AuthUser) {
 
-		if(savedDonation.status !== donationPackagesStatus.WaitingForPickup &&
-			savedDonation.status !== donationPackagesStatus.OnDeliveryRoute
-		){
+		if(savedDonation.status !== donationPackagesStatus.WaitingForPickup){
 			throw new InvalidAction(`Cannot confirm collected with ${savedDonation.status}`);
 		}
 		await this.updateShipmentData(savedDonation, authUser, { collected_at: new Date()});
@@ -75,9 +73,15 @@ export class DbUpdateDonationPackage implements IUpdateDonationPackage {
 
 		if(
 			savedDonation.status !== donationPackagesStatus.OnDeliveryRoute &&
-			savedDonation.status === donationPackagesStatus.Received
+			savedDonation.status !== donationPackagesStatus.Delivered
 		){
 			throw new InvalidAction(`Cannot confirm received with ${savedDonation.status}`);
+		}
+		if(
+			authUser.profile_type !== profilesTypes.Distributor ||
+			authUser.user_id !== savedDonation.organization_distributor_id
+		){
+			throw new InvalidAction(`Profile ${authUser.profile_type} cannot confirm received`);
 		}
 		await this.updateShipmentData(savedDonation, authUser, { delivered_at: new Date()});
 		return await this.updateDonation(savedDonation, donationPackagesStatus.Received);
@@ -85,12 +89,11 @@ export class DbUpdateDonationPackage implements IUpdateDonationPackage {
 
 	private async confirmDonationDelivered(savedDonation: DonationPackage, authUser: AuthUser) {
 
-		if(
-			savedDonation.status !== donationPackagesStatus.OnDeliveryRoute &&
-			savedDonation.status !== donationPackagesStatus.Received &&
-			savedDonation.status === donationPackagesStatus.Delivered
-		){
+		if(savedDonation.status !== donationPackagesStatus.OnDeliveryRoute){
 			throw new InvalidAction(`Cannot confirm delivered with ${savedDonation.status}`);
+		}
+		if(	authUser.profile_type !== profilesTypes.Transporter	){
+			throw new InvalidAction(`Profile ${authUser.profile_type} cannot confirm delivered`);
 		}
 		await this.updateShipmentData(savedDonation, authUser, { delivered_at: new Date()});
 		return await this.updateDonation(savedDonation, donationPackagesStatus.Delivered);
@@ -99,46 +102,54 @@ export class DbUpdateDonationPackage implements IUpdateDonationPackage {
 
 	private async confirmDonationReturned(savedDonation: DonationPackage, authUser: AuthUser) {
 
-		if(
-			savedDonation.status !== donationPackagesStatus.ReturningToDonor &&
-			savedDonation.status === donationPackagesStatus.Returned
-		){
+		if(	savedDonation.status !== donationPackagesStatus.ReturningToDonor){
 			throw new InvalidAction(`Cannot confirm returned with ${savedDonation.status}`);
+		}
+		if(
+			authUser.profile_type !== profilesTypes.Donor ||
+			authUser.user_id !== savedDonation.user_donor_id
+		){
+			throw new InvalidAction(`Profile ${authUser.profile_type} cannot confirm returned`);
 		}
 		return await this.updateDonation(savedDonation, donationPackagesStatus.Returned);
 	}
 
 	private async confirmDonateAgain(savedDonation: DonationPackage, authUser: AuthUser) {
 
-		if(
-			savedDonation.status !== donationPackagesStatus.Returned &&
-			savedDonation.status !== donationPackagesStatus.WaitingATransporter
-		){
+		if(savedDonation.status !== donationPackagesStatus.Returned){
 			throw new InvalidAction(`Cannot accept with ${savedDonation.status}`);
+		}
+		if(
+			authUser.profile_type !== profilesTypes.Donor ||
+			authUser.user_id !== savedDonation.user_donor_id
+		){
+			throw new InvalidAction(`Profile ${authUser.profile_type} cannot confirm donate again`);
 		}
 		return await this.updateDonation(savedDonation, donationPackagesStatus.WaitingATransporter);
 	}
 
 	private async cancelDonation(savedDonation: DonationPackage, authUser: AuthUser) {
 
-		if(
-			savedDonation.status !== donationPackagesStatus.WaitingForPickup &&
-			savedDonation.status === donationPackagesStatus.Canceled
-		){
+		if(savedDonation.status !== donationPackagesStatus.WaitingATransporter){
 			throw new InvalidAction(`Cannot cancel with ${savedDonation.status}`);
+		}
+		if(
+			authUser.profile_type !== profilesTypes.Donor ||
+			authUser.user_id !== savedDonation.user_donor_id
+		){
+			throw new InvalidAction(`Profile ${authUser.profile_type} cannot cancel donate`);
 		}
 		return await this.updateDonation(savedDonation, donationPackagesStatus.Canceled);
 	}
 
 	private async confirmDonationTransport(savedDonation: DonationPackage, authUser: AuthUser) {
 
-		if(
-			savedDonation.status !== donationPackagesStatus.WaitingATransporter &&
-			savedDonation.status === donationPackagesStatus.WaitingForPickup
-		){
+		if(	savedDonation.status !== donationPackagesStatus.WaitingATransporter	){
 			throw new InvalidAction(`Cannot accept with ${savedDonation.status}`);
 		}
-
+		if(authUser.profile_type !== profilesTypes.Transporter){
+			throw new InvalidAction(`Profile ${authUser.profile_type} cannot accept transport`);
+		}
 		const shipment = await this.createShipment(savedDonation, authUser);
 		savedDonation.shipment_id = shipment.id;
 
@@ -147,11 +158,11 @@ export class DbUpdateDonationPackage implements IUpdateDonationPackage {
 
 	private async cancelDonationTransport(savedDonation: DonationPackage, authUser: AuthUser) {
 
-		if(
-			savedDonation.status !== donationPackagesStatus.WaitingForPickup &&
-			savedDonation.status === donationPackagesStatus.WaitingATransporter
-		){
+		if(savedDonation.status !== donationPackagesStatus.WaitingForPickup){
 			throw new InvalidAction(`Cannot accept with ${savedDonation.status}`);
+		}
+		if(authUser.profile_type !== profilesTypes.Transporter){
+			throw new InvalidAction(`Profile ${authUser.profile_type} cannot cancel transport`);
 		}
 		await this.deleteShipmentData(savedDonation, authUser);
 		return await this.updateDonation(savedDonation, donationPackagesStatus.WaitingATransporter);
@@ -159,11 +170,11 @@ export class DbUpdateDonationPackage implements IUpdateDonationPackage {
 
 	private async cancelTransportAndReturn(savedDonation: DonationPackage, authUser: AuthUser) {
 
-		if(
-			savedDonation.status !== donationPackagesStatus.OnDeliveryRoute &&
-			savedDonation.status === donationPackagesStatus.ReturningToDonor
-		){
+		if(savedDonation.status !== donationPackagesStatus.OnDeliveryRoute){
 			throw new InvalidAction(`Cannot cancel with ${savedDonation.status}`);
+		}
+		if(authUser.profile_type !== profilesTypes.Transporter){
+			throw new InvalidAction(`Profile ${authUser.profile_type} cannot cancel transport`);
 		}
 		return await this.updateDonation(savedDonation, donationPackagesStatus.ReturningToDonor);
 	}
