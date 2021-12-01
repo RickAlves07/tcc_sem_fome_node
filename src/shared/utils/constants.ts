@@ -47,6 +47,11 @@ export const donationsByStatusToReturnByRouteParam = {
 		donationPackagesStatus.Delivered,
 		donationPackagesStatus.Received,
 	],
+	'shipment-in-progress': [
+		donationPackagesStatus.WaitingForPickup,
+		donationPackagesStatus.OnDeliveryRoute,
+		donationPackagesStatus.ReturningToDonor,
+	]
 }
 export const statusToReturnByRouteParamList = {
 	InProgress:'in-progress',
@@ -54,6 +59,7 @@ export const statusToReturnByRouteParamList = {
 	Available: 'available',
 	onTheWay:'on-the-way',
 	Received: 'received',
+	ShipmentInProgress: 'shipment-in-progress',
 }
 
 export const profilesTypes = {

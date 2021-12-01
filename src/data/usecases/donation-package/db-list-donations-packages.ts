@@ -24,7 +24,7 @@ export class DbListDonationsPackages implements IListDonationsPackages {
 
 		let conditionsTransporter: any = {}
 
-		if(params.route === statusToReturnByRouteParamList.Available){
+		if(params.route === statusToReturnByRouteParamList.ShipmentInProgress){
 			conditionsTransporter = {
 				user_transporter_id: params.auth_user.user_id,
 			}
