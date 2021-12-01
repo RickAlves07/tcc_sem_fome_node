@@ -20,11 +20,15 @@ export class DbListDonationsPackages implements IListDonationsPackages {
 
 	async list(params: ListDonationsPackages.Params): Promise<ListDonationsPackages.Result> {
 
-		let conditions: any = this.getConditionsByProfile(params);
+		let conditions: any = {
+			status: this.setListOfStatusToGetByProfile(params.route),
+		}
 
-		let conditionsTransporter: any = {}
+		conditions = this.getConditionsByRoute(params, conditions);
 
-		if(params.route === statusToReturnByRouteParamList.ShipmentInProgress){
+		let conditionsTransporter: any;
+
+		if(params.auth_user.profile_type === profilesTypes.Transporter){
 			conditionsTransporter = {
 				user_transporter_id: params.auth_user.user_id,
 			}
@@ -54,24 +58,25 @@ export class DbListDonationsPackages implements IListDonationsPackages {
 
 	}
 
-	private getConditionsByProfile(params: ListDonationsPackages.Params){
-		let conditions: any = {
-			status: this.setListOfStatusToGetByProfile(params.route),
-		}
-
+	private getConditionsByRoute(params: ListDonationsPackages.Params, conditions: any){
 		switch(params.route){
 			case statusToReturnByRouteParamList.History || statusToReturnByRouteParamList.InProgress:
-				conditions = {
-					...conditions,
-					user_donor_id: params.auth_user.user_id,
+				if(params.auth_user.profile_type === profilesTypes.Donor || params.auth_user.profile_type === profilesTypes.Distributor){
+					conditions = {
+						...conditions,
+						user_donor_id: params.auth_user.user_id,
+					}
 				}
 				break;
 			case statusToReturnByRouteParamList.onTheWay || statusToReturnByRouteParamList.Received:
-				conditions = {
-					...conditions,
-					organization_distributor_id: params.auth_user.user_id,
+				if(params.auth_user.profile_type === profilesTypes.Distributor){
+					conditions = {
+						...conditions,
+						organization_distributor_id: params.auth_user.user_id,
+					}
 				}
 				break;
+
 			default:
 		}
 		return conditions;
