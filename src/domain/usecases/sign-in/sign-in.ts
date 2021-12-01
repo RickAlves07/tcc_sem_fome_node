@@ -1,3 +1,4 @@
+import { LoginData } from './../../models/auth/login';
 export interface ISignIn {
 	login: (userData: SignIn.Params) => Promise<SignIn.Result>;
 }
@@ -8,10 +9,5 @@ export namespace SignIn {
 		password: string;
 	};
 
-	export type Result = {
-		userName: string,
-		profileType: string,
-		organizationName?: string,
-		token: string
-	};
+	export type Result = LoginData;
 }

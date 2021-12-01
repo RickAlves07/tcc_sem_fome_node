@@ -4,6 +4,7 @@ import { User } from '@/domain/models/user';
 import { injectable, inject } from 'tsyringe';
 import { IGetUser, SignIn, ISignIn, IGetOrganization} from '@/domain/usecases';
 import { ICryptography, IHasher } from '@/infra/protocols';
+import { LoginData } from '@/domain/models/auth';
 
 @injectable()
 export class DbSignIn implements ISignIn {
@@ -35,6 +36,7 @@ export class DbSignIn implements ISignIn {
 		const token = await this.generateAuthToken(userRegistered);
 
 		const loginData: LoginData = {
+			userId: userRegistered.id,
 			userName: userRegistered.name,
 			profileType: userRegistered.profile_type,
 			token: token,
@@ -84,11 +86,4 @@ export class DbSignIn implements ISignIn {
 	{
 		return await this.getOrganization.getByAddressId({address_id: userData.address_id});
 	}
-}
-
-type LoginData = {
-	userName: string
-	profileType: string
-	organizationName?: string
-	token: string,
 }
