@@ -78,6 +78,7 @@ export class DbListDonationsPackages implements IListDonationsPackages {
 				break;
 
 			default:
+				break;
 		}
 		return conditions;
 	}
