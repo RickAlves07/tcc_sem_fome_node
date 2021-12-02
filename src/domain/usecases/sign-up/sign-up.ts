@@ -1,6 +1,7 @@
 import { AddUser, AddAddress, AddOrganization, SignIn } from '@/domain/usecases';
 export interface ISignUp {
 	new: (userData: SignUp.Params) => Promise<SignUp.Result>;
+	checkRegisterEmail: (data: any) => Promise<boolean>
 }
 
 export namespace SignUp {

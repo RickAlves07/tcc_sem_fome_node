@@ -1,6 +1,3 @@
-import { Unauthorized } from './../../../shared/errors/http-status-errors';
-import { AuthUser } from '@/domain/models/auth';
-import { DonationPackage } from '@/domain/models/donation-package';
 import { injectable, inject } from 'tsyringe';
 import { ListDonationsPackages, IListDonationsPackages } from '@/domain/usecases';
 import { IDonationPackageRepository, IUserRepository } from '@/infra/db/repositories';
@@ -61,7 +58,8 @@ export class DbListDonationsPackages implements IListDonationsPackages {
 
 	private getConditionsByRoute(params: ListDonationsPackages.Params, conditions: any){
 		switch(params.route){
-			case statusToReturnByRouteParamList.History || statusToReturnByRouteParamList.InProgress:
+			case statusToReturnByRouteParamList.History:
+			case statusToReturnByRouteParamList.InProgress:
 				if(params.auth_user.profile_type === profilesTypes.Donor || params.auth_user.profile_type === profilesTypes.Distributor){
 					conditions = {
 						...conditions,
@@ -69,7 +67,8 @@ export class DbListDonationsPackages implements IListDonationsPackages {
 					}
 				}
 				break;
-			case statusToReturnByRouteParamList.onTheWay || statusToReturnByRouteParamList.Received:
+			case statusToReturnByRouteParamList.onTheWay:
+			case statusToReturnByRouteParamList.Received:
 				if(params.auth_user.profile_type === profilesTypes.Distributor){
 					conditions = {
 						...conditions,

@@ -69,7 +69,8 @@ export class DbSignIn implements ISignIn {
 
 	private async validatePassword(userCredentialsPassword: string, userRegisteredPassword: string) : Promise<void>
 	{
-		if(await !this.hasher.compare(userCredentialsPassword, userRegisteredPassword))
+		const compare = await this.hasher.compare(userCredentialsPassword, userRegisteredPassword)
+		if(!compare)
 		{
 			throw new InvalidUserPassword();
 		}

@@ -13,6 +13,7 @@ import { IAddAddress,
 		ISignIn,
 		SignIn} from '@/domain/usecases';
 import { IHasher } from '@/infra/protocols';
+import { IUserRepository } from '@/infra/db/repositories';
 
 @injectable()
 export class DbSignUp implements ISignUp {
@@ -24,8 +25,8 @@ export class DbSignUp implements ISignUp {
 		@inject('AddUser')
 		private addUser: IAddUser,
 
-		@inject('GetUser')
-		private getUser: IGetUser,
+		@inject('UserRepository')
+		private userRepository: IUserRepository,
 
 		@inject('AddOrganization')
 		private addOrganization: IAddOrganization,
@@ -37,9 +38,13 @@ export class DbSignUp implements ISignUp {
 		private signIn: ISignIn,
 	) {}
 
+	async checkRegisterEmail(data: any): Promise<boolean> {
+		return await this.isUserEmailAlreadyRegistered(data.email);
+	}
+
 	async new(data: SignUp.Params): Promise<SignUp.Result> {
 
-		await this.isUserEmailAlreadyRegistered(data.user);
+		await this.isUserEmailAlreadyRegistered(data.user.email);
 
 		const savedAddress = await this.saveAddress(data.address);
 
@@ -56,10 +61,12 @@ export class DbSignUp implements ISignUp {
 		return await this.loginUser(data.user)
 	}
 
-	private async isUserEmailAlreadyRegistered(userData: User) : Promise<void> {
-		if(await this.getUser.get({email: userData.email})) {
+	private async isUserEmailAlreadyRegistered(userEmail: string) : Promise<boolean> {
+		const userFound = await this.userRepository.findByEmail(userEmail);
+		if(userFound) {
 			throw new EmailAlreadyRegistered();
 		}
+		return false;
 	}
 
 	private async saveAddress(addressData: Address) : Promise<Address> {

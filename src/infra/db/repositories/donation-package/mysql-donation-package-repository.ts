@@ -21,7 +21,7 @@ implements IDonationPackageRepository
 		const response = await super.findAll(
 			pageIndex,
 			pageSize,
-			{ where: conditions, order: [['created_at', 'DESC']] },
+			{ where: conditions, order: [['created_at', 'ASC']] },
 			{ include: [
 				{ association: 'donation_address' },
 				{

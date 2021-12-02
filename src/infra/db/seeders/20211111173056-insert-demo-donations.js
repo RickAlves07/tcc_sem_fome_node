@@ -20,8 +20,8 @@ module.exports = {
 			address_donor_id: 1,
 			organization_distributor_id: 3,
 			scheduled_at: scheduled_1,
-			created_at: new Date(),
-			updated_at: new Date(),
+			created_at: '2021-12-31 00:00:00',
+			updated_at: '2021-12-31 00:00:00',
 		}, {
 			id: 2,
 			status: 'Em rota de Entrega',
@@ -33,8 +33,8 @@ module.exports = {
 			address_donor_id: 1,
 			organization_distributor_id: 3,
 			scheduled_at: scheduled_2,
-			created_at: new Date(),
-			updated_at: new Date(),
+			created_at: '2021-12-31 00:00:00',
+			updated_at: '2021-12-31 00:00:00',
 		}, {
 			id: 3,
 			status: 'Aguardando um Transportador',
@@ -46,8 +46,8 @@ module.exports = {
 			address_donor_id: 1,
 			organization_distributor_id: 3,
 			scheduled_at: scheduled_3,
-			created_at: new Date(),
-			updated_at: new Date(),
+			created_at: '2021-12-31 00:00:00',
+			updated_at: '2021-12-31 00:00:00',
 		}, ], {});
 	},
 
