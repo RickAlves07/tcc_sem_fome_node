@@ -47,19 +47,40 @@ export const donationsByStatusToReturnByRouteParam = {
 		donationPackagesStatus.Delivered,
 		donationPackagesStatus.Received,
 	],
-	'shipment-in-progress': [
+	'shipments-in-progress': [
 		donationPackagesStatus.WaitingForPickup,
 		donationPackagesStatus.OnDeliveryRoute,
 		donationPackagesStatus.ReturningToDonor,
-	]
+	],
+	'shipments-history': [
+		donationPackagesStatus.Delivered,
+		donationPackagesStatus.Received,
+		donationPackagesStatus.Returned,
+		donationPackagesStatus.Canceled,
+	],
+	'transfers-history': [
+		donationPackagesStatus.Delivered,
+		donationPackagesStatus.Received,
+		donationPackagesStatus.Returned,
+		donationPackagesStatus.Canceled,
+	],
+	'transfers-in-progress': [
+		donationPackagesStatus.WaitingATransporter,
+		donationPackagesStatus.WaitingForPickup,
+		donationPackagesStatus.OnDeliveryRoute,
+		donationPackagesStatus.ReturningToDonor,
+	],
 }
 export const statusToReturnByRouteParamList = {
 	InProgress:'in-progress',
 	History: 'history',
 	Available: 'available',
-	onTheWay:'on-the-way',
+	OnTheWay:'on-the-way',
 	Received: 'received',
-	ShipmentInProgress: 'shipment-in-progress',
+	ShipmentsInProgress: 'shipments-in-progress',
+	ShipmentsHistory: 'shipments-history',
+	TransfersHistory: 'transfers-history',
+	TransfersInProgress: 'transfers-in-progress',
 }
 
 export const profilesTypes = {
